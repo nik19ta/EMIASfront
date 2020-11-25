@@ -18,22 +18,99 @@
             </div>
             <!-- ... -->
 
-
-            <!-- 30 -->
-            <!-- 38 -->
-            <!-- 10 -->
-            <!-- 10 -->
-            <!-- 12 -->
-
-            <p class="more" >Подробнее</p>
+            <div class="row" @click='open(1)' >
+                <p>Администраторы</p>
+                <img src="../assets/mdi_keyboard_arrow_down.svg" v-bind:class="[isClosed1 ? 'opened' : 'closed', 'transition']" alt="">
+            </div>
+            <div id='div1' class="content" style="display : none"  >
+                <p>...</p>
+            </div>
+            <div class="row" @click='open(2)' >
+                <p>Тимлиды</p>
+                <img src="../assets/mdi_keyboard_arrow_down.svg" v-bind:class="[isClosed2 ? 'opened' : 'closed', 'transition']" alt="">
+            </div>
+            <div id='div2' class="content"  style="display : none" >
+                <p>...</p>
+            </div>
+            <div class="row"  @click='open(3)' >
+                <p>Координаторы</p>
+                <img src="../assets/mdi_keyboard_arrow_down.svg" v-bind:class="[isClosed3 ? 'opened' : 'closed', 'transition']" alt="">
+            </div>
+            <div id='div3' class="content" style="display : none"  >
+                <p>...</p>
+            </div>
+            <div class="row" @click='open(4)'>
+                <p>Технические специалисты</p>
+                <img src="../assets/mdi_keyboard_arrow_down.svg" v-bind:class="[isClosed4 ? 'opened' : 'closed', 'transition']" alt="">
+            </div>
+            <div id='div4' class="content" style="display : none"  >
+                <p>...</p>
+            </div>
+            <div class="row" @click='open(5)'>
+                <p>Аналитики</p>
+                <img src="../assets/mdi_keyboard_arrow_down.svg" v-bind:class="[isClosed5 ? 'opened' : 'closed', 'transition']" alt="">
+            </div>
+            <div id='div5' class="content" style="display : none"  >
+                <p>...</p>
+            </div>
+            <div class="row" @click='open(6)' >
+                <p>Консультанты </p>
+                <img src="../assets/mdi_keyboard_arrow_down.svg" v-bind:class="[isClosed6 ? 'opened' : 'closed', 'transition']" alt="">
+            </div>
+            <div id='div6' class="content" style="display : none"  >
+                <p>...</p>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+import $ from 'jquery'
+export default {
+    name: 'ProjectProgressBar',
+    // mounted() {
+    //     $(`div#div1`).slideToggle();
+    //     $(`div#div2`).slideToggle();
+    //     $(`div#div3`).slideToggle();
+    //     $(`div#div4`).slideToggle();
+    //     $(`div#div5`).slideToggle();
+    //     $(`div#div6`).slideToggle();
+    // },
+    data: function() {
+        return {
+            isClosed1: false,
+            isClosed2: false,
+            isClosed3: false,
+            isClosed4: false,
+            isClosed5: false,
+            isClosed6: false,
+        }
+    },
+    methods: {
+        open(data) {
+            
+            
+            for (let i = 0; i < 6; i++) {
+                if (this[`isClosed${i}`] == true) {
+                    $(`div#div${i}`).slideToggle();
+                    this[`isClosed${i}`] = false
+                }
+                
+            }
+            this[`isClosed${data}`] = !this[`isClosed${data}`]
+
+            $(`div#div${data}`).slideToggle();
+        }
+    }
+}
 </script>
 
 <style scoped>
+.content{
+    height: 200px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
 .Team_title{
     width: 30%;
 }
@@ -49,9 +126,26 @@
 .Thanks_title{
     width: 12%;
 }
+
+/* <!-- 30% --><!-- 38% --><!-- 10% --><!-- 10% --><!-- 12% --> */
+
+.row {
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 54px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
 .ProjectProgressBar{
     padding-left: 70px;
     padding-right: 70px;
+    border-radius: 10px;
 }
 .text_btn {
     font-family: Croc;
@@ -89,7 +183,7 @@
 .card{
     margin-top: 20px;
     width: 100%;
-    height: 307px;
+    height: auto;
 
     background: #FFFFFF;
 
@@ -125,23 +219,14 @@
 
     color: #FFFFFF;
 }
-.more{
-    position: absolute;
-    width: 87px;
-    height: 14px;
-    right: 18px;
-    bottom: 23px;
-
-    font-family: Croc;
-    font-style: normal;
-    font-weight: 300;
-    font-size: 15.8667px;
-    line-height: 103.4%;
-
-    /* or 16px */
-    text-decoration-line: underline;
-
-    color: #00A560;
+.transition {
+    transition: all 0.3s;
 }
+.closed {
+        transform: rotate(0deg);
+    }
+    .opened {
+        transform: rotate(180deg);
+    }
 </style>
     
