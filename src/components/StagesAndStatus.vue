@@ -10,18 +10,35 @@
             <div class="content" >
                 <div class="content_div" >
                     <img src="../assets/start.svg" alt="">
-                    <p>Старт</p>
+                    <p class="text">Старт</p>
                 </div>
                 <div class="progress" >
-
+                    <div class="point done_point " ></div>
+                    <div class="line done_line" ></div>
+                    <div class="point done_point" ></div>
+                    <div class="line done_line" ></div>
+                    <div class="point done_point" ></div>
+                    <div class="line done_line" ></div>
+                    <div class="point done_point" ></div>
+                    <div class="line done_line" ></div>
+                    <div class="point done_point" ></div>
+                    <div class="line done_line" ></div>
+                    <div class="point done_point" ></div>
+                    <div class="line done_line" ></div>
+                    <div class="point now_point" ></div>
+                    <div class="line not_line" ></div>
+                    <div class="point not_point" ></div>
+                    <div class="line not_line" ></div>
+                    <div class="point not_point" ></div>
+                    <div class="line not_line" ></div>
+                    <div class="point not_point" ></div>
                 </div>
                 <div class="content_div" >
                     <img src="../assets/finish.svg" alt="">
-                    <p>Финиш</p>
+                    <p class="text">Финиш</p>
                 </div>
             </div>
             <!-- ... -->
-            
 
             <p class="more" >Подробнее</p>
         </div>
@@ -32,7 +49,52 @@
 </script>
 
 <style scoped>
-p {
+.point{
+    width: 18px;
+    height: 18px;
+    border-radius: 100%;
+    margin-top: calc(-18px/2 + 1px);
+    /* background: #00A560; */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.line{
+    width: calc((100% - 60px - 60px)/10);
+}
+.done_line{
+    background: #00A560;
+}
+.not_line {
+    background: #C4C4C4;
+}
+.done_point{
+    background: #00A560;
+}
+.now_point{
+    background: #FFFFFF;
+    border: 1px solid #00A560;
+    box-shadow: 0px 3.96667px 22.8083px -2.975px rgba(0, 0, 0, 0.1);
+}
+.now_point::before {
+    content: "";
+    display: block;
+    /* position: absolute; */
+    background: #00A560;
+    border-radius: 100%;
+    width: 9px;
+    height: 9px;
+    /* margin-top: calc(-9px/2 + 1px); */
+}
+
+.not_point{
+    background: #FFFFFF;
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+}
+
+.text {
     font-family: Croc;
     font-style: normal;
     font-weight:100;
@@ -52,7 +114,9 @@ p {
 .progress{
     width: calc(100% - 60px - 60px);
     height: 2px;
-    background: #00A560;
+    /* background: #00A560; */
+    display: flex;
+    justify-content: space-between;
 }
 .content{
     display: flex;
