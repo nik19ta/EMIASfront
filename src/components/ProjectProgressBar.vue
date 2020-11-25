@@ -88,16 +88,14 @@ export default {
     },
     methods: {
         open(data) {
-            
+            this[`isClosed${data}`] = !this[`isClosed${data}`]
             
             for (let i = 0; i < 6; i++) {
-                if (this[`isClosed${i + 1}`] == true) {
+                if (this[`isClosed${i + 1}`] == true && `isClosed${i + 1}` != `isClosed${data}`) {
                     $(`div#div${i + 1}`).slideToggle();
                     this[`isClosed${i + 1}`] = false
                 }
-                
             }
-            this[`isClosed${data}`] = !this[`isClosed${data}`]
 
             $(`div#div${data}`).slideToggle();
         }
