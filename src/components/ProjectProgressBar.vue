@@ -91,9 +91,9 @@ export default {
             
             
             for (let i = 0; i < 6; i++) {
-                if (this[`isClosed${i}`] == true) {
-                    $(`div#div${i}`).slideToggle();
-                    this[`isClosed${i}`] = false
+                if (this[`isClosed${i + 1}`] == true) {
+                    $(`div#div${i + 1}`).slideToggle();
+                    this[`isClosed${i + 1}`] = false
                 }
                 
             }
