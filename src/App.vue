@@ -17,7 +17,7 @@ export default {
 #app {
   padding: 0;
   margin: 0;
-  /* font-family: CrocWebBold, CrocWebLight, CrocWebRegular; */
+  font-family: Croc;
   /* -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; */
   background: rgb(243,243,243);
