@@ -6,49 +6,68 @@
             <div class="title_card" >
                 <p class="title_card_text" >Название проекта</p>
             </div>
-
             <div class="content" >
                 <div class="content_div" >
                     <img src="../assets/start.svg" alt="">
                     <p class="text">Старт</p>
                 </div>
                 <div class="progress" >
-                    <div class="point done_point " ></div>
-                    <div class="line done_line" ></div>
-                    <div class="point done_point" ></div>
-                    <div class="line done_line" ></div>
-                    <div class="point done_point" ></div>
-                    <div class="line done_line" ></div>
-                    <div class="point done_point" ></div>
-                    <div class="line done_line" ></div>
-                    <div class="point done_point" ></div>
-                    <div class="line done_line" ></div>
-                    <div class="point done_point" ></div>
-                    <div class="line done_line" ></div>
-                    <div class="point now_point" ></div>
-                    <div class="line not_line" ></div>
-                    <div class="point not_point" ></div>
-                    <div class="line not_line" ></div>
-                    <div class="point not_point" ></div>
-                    <div class="line not_line" ></div>
-                    <div class="point not_point" ></div>
+                    <div v-for="i in stages" :key="i" :class="[i < 10 ? 'item' : '']" >
+                        <div class="point" :class="[i == actual_stage ? 'now_point' : i < actual_stage ? 'done_point' : 'not_point']" ></div>
+                        <div v-if="i < 10" class="line" :class="[i < actual_stage ? 'done_line' : 'not_line']"  ></div>
+                    </div>
                 </div>
                 <div class="content_div" >
                     <img src="../assets/finish.svg" alt="">
                     <p class="text">Финиш</p>
                 </div>
             </div>
-            <!-- ... -->
-
             <p class="more" >Подробнее</p>
         </div>
     </div>
 </template>
 
 <script>
+export default {
+    props: {
+        host: {}
+    },
+    data: function() {
+        return {
+            actual_stage: 0,
+            stages: 0
+        }
+    },
+    mounted() {
+        const vm = this;
+        fetch(this.host + 'project_status', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "GET",
+        })
+        .then(response => response.text())
+        .then((response) => {
+            response = JSON.parse(response)
+            vm.actual_stage = response.status.actual_stage;
+            vm.stages = response.status.stages;
+        })
+        .catch(err => console.log(err))
+    },
+    // methods: {
+        
+    // }
+}
 </script>
 
 <style scoped>
+.item{
+    display: flex;
+    width: 100%;
+    position: relative;
+    justify-content: space-around;
+}
 .point{
     width: 18px;
     height: 18px;
@@ -65,9 +84,11 @@
 }
 .done_line{
     background: #00A560;
+    width: 70%;
 }
 .not_line {
     background: #C4C4C4;
+    width: 70%;
 }
 .done_point{
     background: #00A560;

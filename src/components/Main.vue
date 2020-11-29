@@ -2,7 +2,7 @@
   <div class="main" >
     <Header/>
     <SubHeader/>
-    <StagesAndStatus/>
+    <StagesAndStatus :host='this.host' />
     <BulletinOfTheProject/>
     <ProjectProgressBar/>
     <GiftsProject/>
@@ -20,6 +20,9 @@ import GiftsProject from './GiftsProject.vue'
 
 export default {
   name: 'HelloWorld',
+  props: {
+    host: {}
+  },
   components: {
     Header,
     SubHeader,

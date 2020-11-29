@@ -1,14 +1,20 @@
 <template>
-  <Main/>
+  <Main :host='host' />
 </template>
 
 <script>
 import Main from './components/Main.vue'
 
+
 export default {
   name: 'App',
   components: {
     Main
+  },
+  data: function() {
+    return {
+      host: "http://localhost:3000/"
+    }
   },
   mounted() {
     document.ondragstart = noselect;
@@ -17,7 +23,7 @@ export default {
     // запрет на выделение элементов страницы
     // document.oncontextmenu = noselect;
     // запрет на выведение контекстного меню
-    function noselect() {return false;}
+    function noselect() {return true;}
   }
 }
 </script>
