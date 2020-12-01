@@ -1,28 +1,30 @@
 <template>
     <div class="StagesAndStatus" >
-        <p class="title"> Этапы и статус</p>
+        <div class="Status" >
+            <p class="title"> Этапы и статус</p>
 
-        <div class="card" >
-            <div class="title_card" >
-                <p class="title_card_text" >Название проекта</p>
-            </div>
-            <div class="content" >
-                <div class="content_div" >
-                    <img src="../assets/start.svg" alt="">
-                    <p class="text">Старт</p>
+            <div class="card" >
+                <div class="title_card" >
+                    <p class="title_card_text" >Название проекта</p>
                 </div>
-                <div class="progress" >
-                    <div v-for="i in stages" :key="i" :class="[i < stages ? 'item' : '']" >
-                        <div class="point" :class="[i == actual_stage ? 'now_point' : i < actual_stage ? 'done_point' : 'not_point']" ></div>
-                        <div v-if="i < stages" class="line" :class="[i < actual_stage ? 'done_line' : 'not_line']"  ></div>
+                <div class="content" >
+                    <div class="content_div" >
+                        <img src="../assets/start.svg" alt="">
+                        <p class="text">Старт</p>
+                    </div>
+                    <div class="progress" >
+                        <div v-for="i in stages" :key="i" :class="[i < stages ? 'item' : '']" >
+                            <div class="point" :class="[i == actual_stage ? 'now_point' : i < actual_stage ? 'done_point' : 'not_point']" ></div>
+                            <div v-if="i < stages" class="line" :class="[i < actual_stage ? 'done_line' : 'not_line']"  ></div>
+                        </div>
+                    </div>
+                    <div class="content_div" >
+                        <img src="../assets/finish.svg" alt="">
+                        <p class="text">Финиш</p>
                     </div>
                 </div>
-                <div class="content_div" >
-                    <img src="../assets/finish.svg" alt="">
-                    <p class="text">Финиш</p>
-                </div>
+                <p class="more" >Подробнее</p>
             </div>
-            <p class="more" >Подробнее</p>
         </div>
     </div>
 </template>
@@ -149,8 +151,16 @@ export default {
     padding-right: 20px;
 }
 .StagesAndStatus{
+    display: flex;
+    justify-content: center;
+    /* padding-left: 70px; */
+    /* padding-right: 70px; */
+}
+.Status{
+    width: 100%;
     padding-left: 70px;
     padding-right: 70px;
+    /* max-width: 1900px; */
 }
 .title{
     margin-top: 74px;
@@ -215,5 +225,12 @@ export default {
     text-decoration-line: underline;
 
     color: #00A560;
+}
+@media screen and (min-width: 1900px) {
+    .Status{
+        min-width: 1600px;
+        max-width: 1600px;
+
+    }    
 }
 </style>

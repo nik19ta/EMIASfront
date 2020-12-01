@@ -1,27 +1,29 @@
 <template>
     <div class="BulletinOfTheProject" >
-        <p class="title"> Вестник проекта</p>
+        <div class="Project" >
+            <p class="title"> Вестник проекта</p>
 
-        <div class="card" >
-            <div class="content" >
-                <div class="card_in_project" >
-                    <div class="status" >Реализована</div>
-                    <p class="text_in_card" >Какой то написанный текст</p>
+            <div class="card" >
+                <div class="content" >
+                    <div class="card_in_project" >
+                        <div class="status" >Реализована</div>
+                        <p class="text_in_card" >Какой то написанный текст</p>
+                    </div>
+                    <div class="card_in_project" >
+                        <div class="status" >Реализована</div>
+                        <p class="text_in_card" >Вместо цвета будет картинка, но её нет, вот</p>
+                    </div>
+                    <div class="card_in_project" >
+                        <div class="status" >Реализована</div>
+                        <p class="text_in_card" >Текст "реализована" опционален ? </p>
+                    </div>
+                    <div class="card_in_project" >
+                        <div class="status" >Реализована</div>
+                        <p class="text_in_card" >Ну как то так</p>
+                    </div>
                 </div>
-                <div class="card_in_project" >
-                    <div class="status" >Реализована</div>
-                    <p class="text_in_card" >Вместо цвета будет картинка, но её нет, вот</p>
-                </div>
-                <div class="card_in_project" >
-                    <div class="status" >Реализована</div>
-                    <p class="text_in_card" >Текст "реализована" опционален ? </p>
-                </div>
-                <div class="card_in_project" >
-                    <div class="status" >Реализована</div>
-                    <p class="text_in_card" >Ну как то так</p>
-                </div>
+                <p class="more" >Подробнее</p>
             </div>
-            <p class="more" >Подробнее</p>
         </div>
     </div>
 </template>
@@ -68,6 +70,11 @@
     padding-right: 20px;
 }
 .BulletinOfTheProject{
+    display: flex;
+    justify-content: center;
+}
+.Project{
+    width: 100%;
     padding-left: 70px;
     padding-right: 70px;
 }
@@ -108,6 +115,12 @@
     text-decoration-line: underline;
 
     color: #00A560;
+}
+@media screen and (min-width: 1900px) {
+    .Project{
+        min-width: 1600px;
+        max-width: 1600px;
+    }    
 }
 </style>
     

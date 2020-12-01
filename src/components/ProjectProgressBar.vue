@@ -1,64 +1,67 @@
 <template>
     <div class="ProjectProgressBar" >
-        <div class="title"> 
-            <p>Прогрессбар проекта</p>
-            <div class="btns" >
-                <button class="btn" > <p class="text_btn">Сказать спасибо</p></button>
-                <button class="btn" > <p class="text_btn">Вручить бейдж</p></button>
-            </div>
-        </div>
+        <div class="ProgressBar" >
 
-        <div class="card" >
-            <div class="title_card" >
-                <div class="Team_title" >Команда</div>
-                <div class="Badges_title" >Бейджи</div>
-                <div class="Like_title" >Лайк</div>
-                <div class="Ideas_title" >Идеи</div>
-                <div class="Thanks_title" >Спасибо</div>
+            <div class="title"> 
+                <p>Прогрессбар проекта</p>
+                <div class="btns" >
+                    <button class="btn" > <p class="text_btn">Сказать спасибо</p></button>
+                    <button class="btn" > <p class="text_btn">Вручить бейдж</p></button>
+                </div>
             </div>
-            <!-- ... -->
 
-            <div class="row" @click='open(1)' >
-                <p>Администраторы</p>
-                <img src="../assets/mdi_keyboard_arrow_down.svg" v-bind:class="[isClosed1 ? 'opened' : 'closed', 'transition']" alt="">
-            </div>
-            <div id='div1' class="content" style="display : none"  >
-                <p>...</p>
-            </div>
-            <div class="row" @click='open(2)' >
-                <p>Тимлиды</p>
-                <img src="../assets/mdi_keyboard_arrow_down.svg" v-bind:class="[isClosed2 ? 'opened' : 'closed', 'transition']" alt="">
-            </div>
-            <div id='div2' class="content"  style="display : none" >
-                <p>...</p>
-            </div>
-            <div class="row"  @click='open(3)' >
-                <p>Координаторы</p>
-                <img src="../assets/mdi_keyboard_arrow_down.svg" v-bind:class="[isClosed3 ? 'opened' : 'closed', 'transition']" alt="">
-            </div>
-            <div id='div3' class="content" style="display : none"  >
-                <p>...</p>
-            </div>
-            <div class="row" @click='open(4)'>
-                <p>Технические специалисты</p>
-                <img src="../assets/mdi_keyboard_arrow_down.svg" v-bind:class="[isClosed4 ? 'opened' : 'closed', 'transition']" alt="">
-            </div>
-            <div id='div4' class="content" style="display : none"  >
-                <p>...</p>
-            </div>
-            <div class="row" @click='open(5)'>
-                <p>Аналитики</p>
-                <img src="../assets/mdi_keyboard_arrow_down.svg" v-bind:class="[isClosed5 ? 'opened' : 'closed', 'transition']" alt="">
-            </div>
-            <div id='div5' class="content" style="display : none"  >
-                <p>...</p>
-            </div>
-            <div class="row" @click='open(6)' >
-                <p>Консультанты </p>
-                <img src="../assets/mdi_keyboard_arrow_down.svg" v-bind:class="[isClosed6 ? 'opened' : 'closed', 'transition']" alt="">
-            </div>
-            <div id='div6' class="content" style="display : none"  >
-                <p>...</p>
+            <div class="card" >
+                <div class="title_card" >
+                    <div class="Team_title" >Команда</div>
+                    <div class="Badges_title" >Бейджи</div>
+                    <div class="Like_title" >Лайк</div>
+                    <div class="Ideas_title" >Идеи</div>
+                    <div class="Thanks_title" >Спасибо</div>
+                </div>
+                <!-- ... -->
+
+                <div class="row" @click='open(1)' >
+                    <p>Администраторы</p>
+                    <img src="../assets/mdi_keyboard_arrow_down.svg" v-bind:class="[isClosed1 ? 'opened' : 'closed', 'transition']" alt="">
+                </div>
+                <div id='div1' class="content" style="display : none"  >
+                    <p>...</p>
+                </div>
+                <div class="row" @click='open(2)' >
+                    <p>Тимлиды</p>
+                    <img src="../assets/mdi_keyboard_arrow_down.svg" v-bind:class="[isClosed2 ? 'opened' : 'closed', 'transition']" alt="">
+                </div>
+                <div id='div2' class="content"  style="display : none" >
+                    <p>...</p>
+                </div>
+                <div class="row"  @click='open(3)' >
+                    <p>Координаторы</p>
+                    <img src="../assets/mdi_keyboard_arrow_down.svg" v-bind:class="[isClosed3 ? 'opened' : 'closed', 'transition']" alt="">
+                </div>
+                <div id='div3' class="content" style="display : none"  >
+                    <p>...</p>
+                </div>
+                <div class="row" @click='open(4)'>
+                    <p>Технические специалисты</p>
+                    <img src="../assets/mdi_keyboard_arrow_down.svg" v-bind:class="[isClosed4 ? 'opened' : 'closed', 'transition']" alt="">
+                </div>
+                <div id='div4' class="content" style="display : none"  >
+                    <p>...</p>
+                </div>
+                <div class="row" @click='open(5)'>
+                    <p>Аналитики</p>
+                    <img src="../assets/mdi_keyboard_arrow_down.svg" v-bind:class="[isClosed5 ? 'opened' : 'closed', 'transition']" alt="">
+                </div>
+                <div id='div5' class="content" style="display : none"  >
+                    <p>...</p>
+                </div>
+                <div class="row" @click='open(6)' >
+                    <p>Консультанты </p>
+                    <img src="../assets/mdi_keyboard_arrow_down.svg" v-bind:class="[isClosed6 ? 'opened' : 'closed', 'transition']" alt="">
+                </div>
+                <div id='div6' class="content" style="display : none"  >
+                    <p>...</p>
+                </div>
             </div>
         </div>
     </div>
@@ -141,6 +144,12 @@ export default {
 }
 
 .ProjectProgressBar{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.ProgressBar{
+    width: 100%;
     padding-left: 70px;
     padding-right: 70px;
     border-radius: 10px;
@@ -221,10 +230,17 @@ export default {
     transition: all 0.3s;
 }
 .closed {
-        transform: rotate(0deg);
+    transform: rotate(0deg);
     }
-    .opened {
-        transform: rotate(180deg);
-    }
+.opened {
+    transform: rotate(180deg);
+}
+@media screen and (min-width: 1900px) {
+    .ProgressBar{
+        min-width: 1600px;
+        max-width: 1600px;
+
+    }    
+}
 </style>
     
