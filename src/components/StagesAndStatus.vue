@@ -12,9 +12,9 @@
                     <p class="text">Старт</p>
                 </div>
                 <div class="progress" >
-                    <div v-for="i in stages" :key="i" :class="[i < 10 ? 'item' : '']" >
+                    <div v-for="i in stages" :key="i" :class="[i < stages ? 'item' : '']" >
                         <div class="point" :class="[i == actual_stage ? 'now_point' : i < actual_stage ? 'done_point' : 'not_point']" ></div>
-                        <div v-if="i < 10" class="line" :class="[i < actual_stage ? 'done_line' : 'not_line']"  ></div>
+                        <div v-if="i < stages" class="line" :class="[i < actual_stage ? 'done_line' : 'not_line']"  ></div>
                     </div>
                 </div>
                 <div class="content_div" >
