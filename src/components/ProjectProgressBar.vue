@@ -237,9 +237,15 @@ export default {
 }
 @media screen and (min-width: 1900px) {
     .ProgressBar{
-        min-width: 1600px;
-        max-width: 1600px;
+        min-width: 1700px;
+        max-width: 1700px;
 
+    }    
+}
+@media screen and (min-width: 1600px) {
+    .ProgressBar{
+        min-width: 1700px;
+        max-width: 1700px;
     }    
 }
 </style>

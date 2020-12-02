@@ -3,13 +3,31 @@
         <img class="logo" src="../assets/logo.svg" alt="">
 
         <div class="exit_and_profile" >
-            <img src="../assets/mdi_perm_identity.svg" alt="">
-            <img src="../assets/mdi_exit_to_app.svg" alt="">
+            <img v-on:click="to_login" class="cursor" src="../assets/mdi_perm_identity.svg" alt="">
+            <img v-on:click="to_login" class="cursor" src="../assets/mdi_exit_to_app.svg" alt="">
         </div>
     </div>
 </template>
 
 <script>
+export default {
+    props: {
+        host: {}
+    },
+    data: function () {
+        return {
+            actual_stage: 0,
+            stages: 0
+        }
+    },
+    mounted() {},
+    methods: {
+        to_login() {
+            console.log(1);
+            this.$emit('tologin', true)
+        },
+    }
+}
 </script>
 
 <style scoped>
@@ -33,5 +51,8 @@
     align-items: center;
     height: 100%;
     width: 70px;
+}
+.cursor{
+    cursor: pointer;
 }
 </style>

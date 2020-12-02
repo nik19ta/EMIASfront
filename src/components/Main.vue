@@ -1,6 +1,7 @@
 <template>
   <div class="main" >
-    <Header/>
+    <Login :host='this.host' v-if="is_login" @tologin='to_login' />  
+    <Header @tologin='to_login' />
     <SubHeader/>
     <StagesAndStatus :host='this.host' />
     <BulletinOfTheProject/>
@@ -16,6 +17,7 @@ import StagesAndStatus from './StagesAndStatus'
 import BulletinOfTheProject from './BulletinOfTheProject.vue'
 import ProjectProgressBar from './ProjectProgressBar.vue'
 import GiftsProject from './GiftsProject.vue'
+import Login from './Login.vue'
 
 
 export default {
@@ -23,13 +25,36 @@ export default {
   props: {
     host: {}
   },
+  data() {
+    return {
+      is_login: false
+    }
+  },
   components: {
     Header,
     SubHeader,
     StagesAndStatus,
     BulletinOfTheProject,
     ProjectProgressBar,
-    GiftsProject
+    GiftsProject,
+    Login
+  }, 
+  methods: {
+    to_login(data) {
+      this.is_login = data;
+
+      // When the modal is shown, we want a fixed body
+      // document.body.style.position = 'fixed';
+      if (data) {
+        document.body.style.overflowY = 'hidden';
+      } else {
+        document.body.style.overflowY = 'auto';
+      }
+
+      // When the modal is hidden, we want to remain at the top of the scroll position
+      // document.body.style.position = '';
+      // document.body.style.top = '';
+    }
   }
 }
 </script>
