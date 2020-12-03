@@ -6,14 +6,17 @@
             <div class="people_name">{{people.name}}</div>
         </div>
         <div class="Badges">
-            <!-- {{people.Badges.length == 0 ? 'Пока что нет.' : people.Badges.length}} -->
-            <div class="Badge_div" v-for="Badge in people.Badges" :key='Badge.code' >
-                <img class="Badges_img" v-if="people.Badges.length != 0" :src="require(`../assets/png_for_BulletinOfTheProject/${Badge.code}.svg`)" alt="">
-                <span class="Badge_count" >
-                    x{{Badge.count}}
-                </span>
+            <div class="Badge_main" v-if="people.Badges.length > 0"  >
+                <div class="Badge_div" v-for="Badge in people.Badges" :key='Badge.code' >
+                    <img class="Badges_img" :src="require(`../assets/png_for_BulletinOfTheProject/${Badge.code}.svg`)" alt="">
+                    <span class="Badge_count" >
+                        x{{Badge.count}}
+                    </span>
+                </div>
             </div>
-            <!-- {{people.Badges}} -->
+                <div v-if="people.Badges.length == 0" >
+                    <p>Пока что нет.</p>
+                </div>
         </div>
         <div class="Like">{{people.like.length}}</div>
         <div class="Ideas">{{people.ideas.length}}</div>
@@ -32,6 +35,9 @@
 </script>
 
 <style  scoped>
+.Badge_main{
+    display: flex;
+}
 .Badge_count{
     margin-left:5px;
 }
