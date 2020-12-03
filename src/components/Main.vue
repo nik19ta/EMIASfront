@@ -1,6 +1,7 @@
 <template>
   <div class="main" >
-    <Login :host='this.host' v-if="is_login" @tologin='to_login' />  
+    <Login :host='this.host' v-if="is_login" @tologin='to_login' @toreg='toReg' />  
+    <Reg :host='this.host' v-if="is_reg" @tologin='to_login' @toreg='toReg' />  
     <Header @tologin='to_login' />
     <SubHeader/>
     <StagesAndStatus :host='this.host' />
@@ -18,6 +19,7 @@ import BulletinOfTheProject from './BulletinOfTheProject.vue'
 import ProjectProgressBar from './ProjectProgressBar.vue'
 import GiftsProject from './GiftsProject.vue'
 import Login from './Login.vue'
+import Reg from './Reg.vue'
 
 
 export default {
@@ -27,7 +29,8 @@ export default {
   },
   data() {
     return {
-      is_login: false
+      is_login: false,
+      is_reg: false,
     }
   },
   components: {
@@ -37,7 +40,8 @@ export default {
     BulletinOfTheProject,
     ProjectProgressBar,
     GiftsProject,
-    Login
+    Login,
+    Reg
   }, 
   methods: {
     to_login(data) {
@@ -54,6 +58,17 @@ export default {
       // When the modal is hidden, we want to remain at the top of the scroll position
       // document.body.style.position = '';
       // document.body.style.top = '';
+    },
+    toReg(data) {
+      this.is_reg = data;
+
+      // When the modal is shown, we want a fixed body
+      // document.body.style.position = 'fixed';
+      if (data) {
+        document.body.style.overflowY = 'hidden';
+      } else {
+        document.body.style.overflowY = 'auto';
+      }
     }
   }
 }

@@ -1,12 +1,13 @@
 <template>
     <div class="login" >
         <div class="ModalWindow" >
-                <h1 class="title" >Авторизация</h1>
+                <h1 class="title" >Регистрация</h1>
                 <form>
                     <input id="login" type="text" placeholder="login" >  <br/>
                     <input type="password" id="password" placeholder="password" > <br/>
-                    <button v-on:click="submit" >Войти</button> <br/>
-                    <p v-on:click="to_reg" class="to_reg" >Зарегестрироватся</p>
+                    <input type="text" id="email" placeholder="email" > <br/>
+                    <button v-on:click="submit" >Зарегистрироватся</button> <br/>
+                    <p v-on:click="to_login" class="to_reg" >Уже есть аккаунт</p>
                     <button class="close" v-on:click="closed" >×</button> <br/>
                 </form>
         </div>
@@ -58,7 +59,8 @@ export default {
         },
         to_login() {
             console.log(1);
-            this.$emit('tologin', false)
+            this.$emit('toreg', false)
+            this.$emit('tologin', true)
         },
     }
 }
