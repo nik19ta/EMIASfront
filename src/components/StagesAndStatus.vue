@@ -23,9 +23,9 @@
                         <p class="text">Финиш</p>
                     </div>
                 </div>
-                <p @click='open' class="more" >Подробнее</p>
+                <p @click='open' class="more" >{{text}}</p>
 
-                <div id='div1' class="center" > 
+                <div id='div' class="center" > 
                     <div  class="map" >
                         <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Adb52615e4ba013599c00400374ecf0c8225ca41074dd5d09aaf9d455dbb5f0f4&amp;source=constructor" width="800" height="450" frameborder="0"></iframe>
                     </div>
@@ -46,7 +46,8 @@ export default {
     data: function() {
         return {
             actual_stage: 0,
-            stages: 0
+            stages: 0,
+            text: 'Подробнее'
         }
     },
     mounted() {
@@ -68,7 +69,12 @@ export default {
     },
     methods: {
         open() {
-            $(`div#div1`).slideToggle();
+            $(`div#div`).slideToggle();
+            if (this.text == "Подробнее") {
+                this.text = 'Свернуть'
+            } else {
+                this.text = "Подробнее"
+            }
         }
     }
 }
@@ -166,7 +172,7 @@ export default {
     justify-content: space-between;
 }
 .content{
-    margin-top: 50px;
+    margin-top: 45px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -245,6 +251,8 @@ export default {
     font-weight: 300;
     font-size: 15.8667px;
     line-height: 103.4%;
+
+    cursor: pointer;
 
     /* or 16px */
     text-decoration-line: underline;
