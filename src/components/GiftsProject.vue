@@ -39,7 +39,7 @@
 .card{
     margin-top: 27px;
     width: 100%;
-    height: 220px;
+    /* height: 220px; */
 
     position: relative;
 }
