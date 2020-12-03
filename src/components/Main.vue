@@ -46,24 +46,14 @@ export default {
   methods: {
     to_login(data) {
       this.is_login = data;
-
-      // When the modal is shown, we want a fixed body
-      // document.body.style.position = 'fixed';
       if (data) {
         document.body.style.overflowY = 'hidden';
       } else {
         document.body.style.overflowY = 'auto';
       }
-
-      // When the modal is hidden, we want to remain at the top of the scroll position
-      // document.body.style.position = '';
-      // document.body.style.top = '';
     },
     toReg(data) {
       this.is_reg = data;
-
-      // When the modal is shown, we want a fixed body
-      // document.body.style.position = 'fixed';
       if (data) {
         document.body.style.overflowY = 'hidden';
       } else {

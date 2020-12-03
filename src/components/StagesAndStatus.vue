@@ -23,13 +23,22 @@
                         <p class="text">Финиш</p>
                     </div>
                 </div>
-                <p class="more" >Подробнее</p>
+                <p @click='open' class="more" >Подробнее</p>
+
+                <div id='div1' class="center" > 
+                    <div  class="map" >
+                        <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Adb52615e4ba013599c00400374ecf0c8225ca41074dd5d09aaf9d455dbb5f0f4&amp;source=constructor" width="800" height="450" frameborder="0"></iframe>
+                    </div>
+                </div>
             </div>
+            
         </div>
     </div>
 </template>
 
 <script>
+import $ from 'jquery'
+
 export default {
     props: {
         host: {}
@@ -57,13 +66,28 @@ export default {
         })
         .catch(err => console.log(err))
     },
-    // methods: {
-        
-    // }
+    methods: {
+        open() {
+            $(`div#div1`).slideToggle();
+        }
+    }
 }
 </script>
 
+
 <style scoped>
+.center{
+    display: none;
+    width: 100%;
+    justify-content: center;
+}
+.map{
+    height: 500px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .item{
     display: flex;
     width: 100%;
@@ -142,6 +166,7 @@ export default {
     justify-content: space-between;
 }
 .content{
+    margin-top: 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -153,6 +178,7 @@ export default {
 .StagesAndStatus{
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     /* padding-left: 70px; */
     /* padding-right: 70px; */
 }
@@ -160,7 +186,6 @@ export default {
     width: 100%;
     padding-left: 70px;
     padding-right: 70px;
-    /* max-width: 1900px; */
 }
 .title{
     margin-top: 74px;
@@ -173,7 +198,7 @@ export default {
 .card{
     margin-top: 27px;
     width: 100%;
-    height: 220px;
+    min-height: 220px;
 
     background: #FFFFFF;
 
