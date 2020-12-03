@@ -5,7 +5,7 @@
     <SubHeader/>
     <StagesAndStatus :host='this.host' />
     <BulletinOfTheProject/>
-    <ProjectProgressBar/>
+    <ProjectProgressBar :host='this.host' />
     <GiftsProject/>
   </div>
 </template>
