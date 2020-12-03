@@ -1,7 +1,7 @@
 <template>
   <div class="main" >
     <Login :host='this.host' v-if="is_login" @tologin='to_login' @toreg='toReg' />  
-    <Reg :host='this.host' v-if="is_reg" @tologin='to_login' @toreg='toReg' />  
+    <Registration :host='this.host' v-if="is_reg" @tologin='to_login' @toreg='toReg' />  
     <Header @tologin='to_login' />
     <SubHeader/>
     <StagesAndStatus :host='this.host' />
@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import Registration from './Registration.vue'
 import Header from './Header.vue'
 import SubHeader from './SubHeader'
 import StagesAndStatus from './StagesAndStatus'
@@ -19,7 +20,6 @@ import BulletinOfTheProject from './BulletinOfTheProject.vue'
 import ProjectProgressBar from './ProjectProgressBar.vue'
 import GiftsProject from './GiftsProject.vue'
 import Login from './Login.vue'
-import Reg from './Reg.vue'
 
 
 export default {
@@ -41,7 +41,7 @@ export default {
     ProjectProgressBar,
     GiftsProject,
     Login,
-    Reg
+    Registration
   }, 
   methods: {
     to_login(data) {
