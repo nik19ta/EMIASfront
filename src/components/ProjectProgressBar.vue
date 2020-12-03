@@ -25,42 +25,54 @@
                     <img src="../assets/mdi_keyboard_arrow_down.svg" v-bind:class="[isClosed1 ? 'opened' : 'closed', 'transition']" alt="">
                 </div>
                 <div id='div1' class="content" style="display : none"  >
-                    <p>...</p>
+                    <div v-for="people in people_array" :key="people.id" >
+                        <people :people='people' role='Администратор' />
+                    </div>
                 </div>
                 <div class="row" @click='open(2)' >
                     <p>Тимлиды</p>
                     <img src="../assets/mdi_keyboard_arrow_down.svg" v-bind:class="[isClosed2 ? 'opened' : 'closed', 'transition']" alt="">
                 </div>
                 <div id='div2' class="content"  style="display : none" >
-                    <p>...</p>
+                    <div v-for="people in people_array" :key="people.id" >
+                        <people :people='people' role='Тимлид' />
+                    </div>
                 </div>
                 <div class="row"  @click='open(3)' >
                     <p>Координаторы</p>
                     <img src="../assets/mdi_keyboard_arrow_down.svg" v-bind:class="[isClosed3 ? 'opened' : 'closed', 'transition']" alt="">
                 </div>
                 <div id='div3' class="content" style="display : none"  >
-                    <p>...</p>
+                    <div v-for="people in people_array" :key="people.id" >
+                        <people :people='people' role='Координатор' />
+                    </div>
                 </div>
                 <div class="row" @click='open(4)'>
                     <p>Технические специалисты</p>
                     <img src="../assets/mdi_keyboard_arrow_down.svg" v-bind:class="[isClosed4 ? 'opened' : 'closed', 'transition']" alt="">
                 </div>
                 <div id='div4' class="content" style="display : none"  >
-                    <p>...</p>
+                    <div v-for="people in people_array" :key="people.id" >
+                        <people :people='people' role='Технический специалист' />
+                    </div>
                 </div>
                 <div class="row" @click='open(5)'>
                     <p>Аналитики</p>
                     <img src="../assets/mdi_keyboard_arrow_down.svg" v-bind:class="[isClosed5 ? 'opened' : 'closed', 'transition']" alt="">
                 </div>
                 <div id='div5' class="content" style="display : none"  >
-                    <p>...</p>
+                    <div v-for="people in people_array" :key="people.id" >
+                        <people :people='people' role='Аналитик' />
+                    </div>
                 </div>
                 <div class="row" @click='open(6)' >
                     <p>Консультанты </p>
                     <img src="../assets/mdi_keyboard_arrow_down.svg" v-bind:class="[isClosed6 ? 'opened' : 'closed', 'transition']" alt="">
                 </div>
                 <div id='div6' class="content" style="display : none"  >
-                    <p>...</p>
+                    <div v-for="people in people_array" :key="people.id" >
+                        <people :people='people' role='Консультант' />
+                    </div>
                 </div>
             </div>
         </div>
@@ -69,16 +81,19 @@
 
 <script>
 import $ from 'jquery'
+import people from './People'
+
 export default {
     name: 'ProjectProgressBar',
-    // mounted() {
-    //     $(`div#div1`).slideToggle();
-    //     $(`div#div2`).slideToggle();
-    //     $(`div#div3`).slideToggle();
-    //     $(`div#div4`).slideToggle();
-    //     $(`div#div5`).slideToggle();
-    //     $(`div#div6`).slideToggle();
-    // },
+    props: {
+        host: {}
+    },
+    components: {
+        people
+    },
+    mounted() {
+        this.get_people()
+    },
     data: function() {
         return {
             isClosed1: false,
@@ -87,9 +102,25 @@ export default {
             isClosed4: false,
             isClosed5: false,
             isClosed6: false,
+            people_array: []
         }
     },
     methods: {
+        get_people() {
+            fetch(this.host + 'get_people', {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "GET"
+            })
+            .then(response => response.text())
+            .then((response) => { 
+                this.people_array = JSON.parse(response)['status']
+                console.log(this.people_array);
+                })
+            .catch(err => console.log(err))
+        },
         open(data) {
             this[`isClosed${data}`] = !this[`isClosed${data}`]
             
@@ -107,24 +138,34 @@ export default {
 </script>
 
 <style scoped>
+.people_name {
+    margin-left: 10px;
+}
+.name{
+    align-items: center;
+}
 .content{
     height: 200px;
     padding-left: 10px;
     padding-right: 10px;
 }
-.Team_title{
+.Team_title, .name{
     width: 30%;
 }
-.Badges_title{
+.name{
+    display: flex;
+    justify-content: flex-start;
+}
+.Badges_title, .Badges{
     width: 38%;
 }
-.Like_title{
+.Like_title, .Like{
     width: 10%;
 }
-.Ideas_title{
+.Ideas_title, .Ideas{
     width: 10%;
 }
-.Thanks_title{
+.Thanks_title, .Thanks{
     width: 12%;
 }
 
