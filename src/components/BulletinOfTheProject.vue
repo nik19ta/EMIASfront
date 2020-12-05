@@ -18,7 +18,32 @@
 
                 <div v-if="is_more" class="main" >
                     <div class="left" >
-                        Какая то инфа
+                        <button class="share__idea" >Поделиться идеей</button>
+
+                        <div class="center" >
+                            <img src="../assets/like.svg" alt="">
+                            лайк идее 
+                            <pre> </pre>
+                            <img src="../assets/settings.svg" alt="">
+                            лайк идее
+                        </div>
+
+                        <div class="name__idea" >
+                            Название лайфхака
+                        </div>
+                        <div class="name__idea" >
+                            Название лайфхака
+                        </div>
+                        <div class="name__idea" >
+                            Название лайфхака
+                        </div>
+                        <div class="name__idea" >
+                            Название лайфхака
+                        </div>
+                        <div class="name__idea" >
+                            Название лайфхака
+                        </div>
+
                     </div>
                     <div class="right" >
                         <div  class="content_more" >
@@ -87,23 +112,67 @@ export default {
 }
 </script>
 <style scoped>
+.name__idea{
+
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-top: 10px;
+
+    width: 303px;
+    height: 61px;
+    background: #FFFFFF;
+
+    /* shadow */
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+.center{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 100%;
+    padding-left: 15%;
+}
+.share__idea{
+    border: 0;
+
+    height: 40px;
+    width: 220px;
+
+    color: #fff;
+    font-size: 14px;
+
+    cursor: pointer;
+
+    background: #00A560;
+
+    /* shadow */
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
 .more__img{
     border-radius: 5px;
 }
 .main{
     display: flex;
-    justify-content: space-between;
     align-items:flex-start;
 }
 .left{
     width: 30%;
     height: 100px;
     padding-left: 20px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
 .right{
     width: calc(100% - 30%);
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-around;
     align-items: flex-start;
     flex-wrap: wrap;
 }
@@ -180,6 +249,7 @@ export default {
     justify-content:center;
     align-items: center;
     width: 100%;
+    max-width: 800px;
     /* height: 470px; */
     padding-left: 20px;
     padding-right: 20px;
