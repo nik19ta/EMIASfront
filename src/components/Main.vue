@@ -5,7 +5,8 @@
     <Header @tologin='to_login' />
     <SubHeader/>
     <StagesAndStatus :host='this.host' />
-    <BulletinOfTheProject/>
+    <Modal v-if="modal" :data='data_for_modal' @tomodal='to_modal' />
+    <BulletinOfTheProject :host='this.host'  @tomodal='to_modal'  />
     <ProjectProgressBar :host='this.host' />
     <GiftsProject/>
   </div>
@@ -13,6 +14,7 @@
 
 <script>
 import Registration from './Registration.vue'
+import Modal from './Modal'
 import Header from './Header.vue'
 import SubHeader from './SubHeader'
 import StagesAndStatus from './StagesAndStatus'
@@ -31,6 +33,8 @@ export default {
     return {
       is_login: false,
       is_reg: false,
+      modal: false,
+      data_for_modal: {}
     }
   },
   components: {
@@ -41,9 +45,21 @@ export default {
     ProjectProgressBar,
     GiftsProject,
     Login,
-    Registration
+    Registration,
+    Modal
   }, 
   methods: {
+    to_modal(data) {
+      this.modal = !this.modal;
+      if (data) {
+        this.data_for_modal = data; 
+      }
+      if (data) {
+        document.body.style.overflowY = 'hidden';
+      } else {
+        document.body.style.overflowY = 'auto';
+      }
+    },
     to_login(data) {
       this.is_login = data;
       if (data) {
@@ -51,6 +67,7 @@ export default {
       } else {
         document.body.style.overflowY = 'auto';
       }
+      
     },
     toReg(data) {
       this.is_reg = data;

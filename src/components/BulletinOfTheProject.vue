@@ -4,34 +4,121 @@
             <p class="title"> Вестник проекта</p>
 
             <div class="card" >
-                <div class="content" >
-                    <div class="card_in_project" >
-                        <div class="status" >Реализована</div>
-                        <p class="text_in_card" >Какой то написанный текст</p>
-                    </div>
-                    <div class="card_in_project" >
-                        <div class="status" >Реализована</div>
-                        <p class="text_in_card" >Вместо цвета будет картинка, но её нет, вот</p>
-                    </div>
-                    <div class="card_in_project" >
-                        <div class="status" >Реализована</div>
-                        <p class="text_in_card" >Текст "реализована" опционален ? </p>
-                    </div>
-                    <div class="card_in_project" >
-                        <div class="status" >Реализована</div>
-                        <p class="text_in_card" >Ну как то так</p>
+                <div v-if="!is_more" class="content" >
+                    <div 
+                    v-for="item in data" 
+                    :key="item.title" 
+                    class="card_in_project" 
+                    :style="`background-image: url(${item.img})`" >
+                        
+                        <div v-if="item.status" class="status" >Реализованно</div>
+                        <p class="text_in_card" >{{item.title}}</p>
                     </div>
                 </div>
-                <p class="more" >Подробнее</p>
+
+                <div v-if="is_more" class="main" >
+                    <div class="left" >
+                        Какая то инфа
+                    </div>
+                    <div class="right" >
+                        <div  class="content_more" >
+                            <div 
+                                v-for="item in data" 
+                                :key="item.title" 
+                                @click="() => to_modal(item)"
+                                class="card_in_project_more" >
+
+                            <div v-if="item.status" class="status" >Реализованно</div>
+                            <img class="more__img" :src="item.img" alt="">
+
+                            <p class="text__card__more item__title " >{{item.title}}</p>
+                            <p class="text__card__more" >{{item.text.substr(0, 200) + '...'}}</p>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="more" @click="more" >{{ is_more ? 'Свернуть' : 'Подробнее'}}</p>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+export default {
+    props: {
+        host: {}
+    },
+    data: function () {
+        return {
+            data: [],
+            is_more: false
+        }
+    },
+    mounted() {
+        this.get_data()
+    },
+    methods: {
+        to_modal(data) {
+            this.$emit('tomodal', data)
+        },
+        more(){
+            this.is_more = !this.is_more;
+        },
+        get_data() {
+            const vm = this;
+            fetch(this.host + 'bulletin_project', {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "GET",
+            })
+            .then(response => response.text())
+            .then((response) => {
+                response = JSON.parse(response)
+                vm.data = response.status;
+            })
+            .catch(err => console.log(err))
+        }
+    }
+}
 </script>
-
 <style scoped>
+.more__img{
+    border-radius: 5px;
+}
+.main{
+    display: flex;
+    justify-content: space-between;
+    align-items:flex-start;
+}
+.left{
+    width: 30%;
+    height: 100px;
+    padding-left: 20px;
+}
+.right{
+    width: calc(100% - 30%);
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+.item__title{
+    font-weight: bold;
+    margin-top: 50px ;
+}
+.more__img{
+    /* height: 200px; */
+    width: 100%;
+}
+.text__card__more{
+    padding-left: 5px;
+    padding-right: 5px;
+}
 .card_in_project{
     width: 234px;
     height: 157px;
@@ -43,7 +130,26 @@
     display: flex;
     justify-content: start;
     align-items: flex-end;
-
+    background-size: cover;
+}
+.card_in_project_more{
+    width: 256px;
+    height: 450px;
+    margin-bottom: 20px;
+    background: burlywood;
+    border-radius: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    position: relative;
+    display: flex;
+    justify-content: start;
+    align-items: flex-start;
+    background-size: cover;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    flex-wrap: wrap;
+    margin-right: 20px;
+    margin-left: 20px;
 }
 .text_in_card{
     padding: 10px;
@@ -69,6 +175,16 @@
     padding-left: 20px;
     padding-right: 20px;
 }
+.content_more {
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    width: 100%;
+    /* height: 470px; */
+    padding-left: 20px;
+    padding-right: 20px;
+    flex-wrap: wrap;
+}
 .BulletinOfTheProject{
     display: flex;
     justify-content: center;
@@ -89,16 +205,18 @@
 .card{
     margin-top: 27px;
     width: 100%;
-    height: 257px;
+    padding-top: 30px;
+    padding-bottom: 50px;
 
     background: #FFFFFF;
 
-    /* shadow */
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
     position: relative;
 }
 .more{
+    cursor: pointer;
+
     position: absolute;
     width: 87px;
     height: 14px;

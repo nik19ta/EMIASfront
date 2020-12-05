@@ -9,9 +9,7 @@
             <div class="Badge_main" v-if="people.Badges.length > 0"  >
                 <div class="Badge_div" v-for="Badge in people.Badges" :key='Badge.code' >
                     <img class="Badges_img" :src="require(`../assets/png_for_BulletinOfTheProject/${Badge.code}.svg`)" alt="">
-                    <span class="Badge_count" >
-                        x{{Badge.count}}
-                    </span>
+                    <span class="Badge_count" >x{{Badge.count}}</span>
                 </div>
             </div>
                 <div v-if="people.Badges.length == 0" >
