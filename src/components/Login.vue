@@ -51,8 +51,11 @@ export default {
                 .then(response => response.text())
                 .then((response) => {
                     console.log(response)
-
-                    alert('Не верный логин или пароль')
+                    if (JSON.parse(response).status == 'ok') {
+                        alert('Вы успешно вошли')
+                    } else {
+                        alert('Не верный логин или пароль')
+                    }
                 })
                 .catch(err => console.log(err))
         },

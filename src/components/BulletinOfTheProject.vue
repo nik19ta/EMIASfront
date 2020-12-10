@@ -18,7 +18,7 @@
 
                 <div v-if="is_more" class="main" >
                     <div class="left" >
-                        <button class="share__idea" >Поделиться идеей</button>
+                        <button @click="shareidea" class="share__idea" >Поделиться идеей</button>
 
                         <div class="center" >
                             <img src="../assets/like.svg" alt="">
@@ -27,21 +27,8 @@
                             <img src="../assets/settings.svg" alt="">
                             лайк идее
                         </div>
-
-                        <div class="name__idea" >
-                            Название лайфхака
-                        </div>
-                        <div class="name__idea" >
-                            Название лайфхака
-                        </div>
-                        <div class="name__idea" >
-                            Название лайфхака
-                        </div>
-                        <div class="name__idea" >
-                            Название лайфхака
-                        </div>
-                        <div class="name__idea" >
-                            Название лайфхака
+                        <div v-for="item in ideas_array" :key="item.id" class="name__idea" >
+                            {{item.text}}
                         </div>
 
                     </div>
@@ -74,18 +61,23 @@
 <script>
 export default {
     props: {
-        host: {}
+        host: {},
+        ideas_array: {}
     },
     data: function () {
         return {
             data: [],
-            is_more: false
+            is_more: false,
         }
     },
     mounted() {
         this.get_data()
+        
     },
     methods: {
+        shareidea() {
+            this.$emit('shareidea', {"data": "ok"})
+        },
         to_modal(data) {
             this.$emit('tomodal', data)
         },
