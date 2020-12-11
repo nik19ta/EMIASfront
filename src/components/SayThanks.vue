@@ -2,15 +2,15 @@
     <div class="login" >
         <div class="ModalWindow" >
             <div class="title__div" >
-                <p>Добавить идею</p>
+                <p>Сказать спасибо</p>
                 <button class="close" v-on:click="closed" >×</button> <br/>
             </div>
             <div class="content" >
-                <textarea v-model="text" name="" id="" placeholder="Опишите свою идею" >
-
+                <input type="text" class="input" placeholder="Начните вводить имя сотрудника" >
+                <textarea v-model="text" name="" id="" placeholder="Введите текст" >
                 </textarea>
                 <div class="btns_inline" >
-                    <button v-on:click="shareidea" class="btn" >Отправить</button>
+                    <button v-on:click="say" class="btn" >Отправить</button>
                     <button v-on:click="closed"  class="btn cancel " >Отмена</button>
                 </div>
             </div>
@@ -31,26 +31,11 @@ export default {
     },
     mounted() {},
     methods: {
-        shareidea() {
-            fetch(this.host + 'shareidea', {
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                method: "POST",
-                body: JSON.stringify({
-                    text: this.text
-                })
-            })
-            .then(response => response.text())
-            .then((response) => {
-                console.log(response)
-                this.$emit('updateideas')
-            })
-            .catch(err => console.log(err))
+        say() {
+            this.$emit('saythanks')
         },
         closed() {
-            this.$emit('shareidea', false)
+            this.$emit('saythanks')
         }
     }
 }
@@ -70,11 +55,12 @@ textarea{
     font-family: Croc;
     resize: none;
     width: calc(100% - 40px);
-    height: 75%;
+    height: 65%;
     background: #fff;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
     border: 0;
+    font-size: 18px;
 }
 .title__div{
     border-top-left-radius: 10px;
@@ -88,7 +74,7 @@ textarea{
     padding-left: 20px;
     padding-right: 20px;
     color: #fff;
-    font-size: 16px;
+    font-size: 24px;
 }
 .image{
     width: 400px;
@@ -188,5 +174,17 @@ form{
 }
 .cancel{
     color: #E1E1E1;
+}
+.input{
+    padding: 10px;
+    font-family: Croc;
+    resize: none;
+    width: calc(100% - 40px);
+    height: 10%;
+    background: #fff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    border: 0;
+    font-size: 18px;
 }
 </style>

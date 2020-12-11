@@ -5,7 +5,7 @@
             <div class="title"> 
                 <p>Прогрессбар проекта</p>
                 <div class="btns" >
-                    <button class="btn" > <p class="text_btn">Сказать спасибо</p></button>
+                    <button @click="saythings_modal" class="btn" > <p class="text_btn">Сказать спасибо</p></button>
                     <button class="btn" > <p class="text_btn">Вручить бейдж</p></button>
                 </div>
             </div>
@@ -106,6 +106,9 @@ export default {
         }
     },
     methods: {
+        saythings_modal() {
+            this.$emit('saythanks')
+        },
         get_people() {
             fetch(this.host + 'get_people', {
                 headers: {

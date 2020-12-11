@@ -88,7 +88,7 @@ textarea{
     padding-left: 20px;
     padding-right: 20px;
     color: #fff;
-    font-size: 16px;
+    font-size: 24px;
 }
 .image{
     width: 400px;
