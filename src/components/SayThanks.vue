@@ -6,7 +6,9 @@
                 <button class="close" v-on:click="closed" >×</button> <br/>
             </div>
             <div class="content" >
-                <input type="text" class="input" placeholder="Начните вводить имя сотрудника" >
+                <select id='people' class="input select ">
+                    <option :value='item.name' v-for='item in say_thanks_array.data' :key='item.name' >{{item.name}}</option>
+                </select>
                 <textarea v-model="text" name="" id="" placeholder="Введите текст" >
                 </textarea>
                 <div class="btns_inline" >
@@ -21,17 +23,33 @@
 <script>
 export default {
     props: {
-        data: {},
-        host: {}
+        host: {},
+        say_thanks_array: {}
     },
     data: function () {
         return {
-            text: ''
+            text: '',
+            people: ''
         }
     },
     mounted() {},
     methods: {
         say() {
+            fetch(this.host + 'say_thanks', {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "POST",
+                body: JSON.stringify({
+                    from: "user..",
+                    text: this.text,
+                    login: document.querySelector('#people').value
+                })
+            })
+            .then(response => response.text())
+            .then((response) => { console.log(response) })
+            .catch(err => console.log(err))
             this.$emit('saythanks')
         },
         closed() {
@@ -186,5 +204,8 @@ form{
     border-radius: 10px;
     border: 0;
     font-size: 18px;
+}
+.select{
+   border: 0 
 }
 </style>

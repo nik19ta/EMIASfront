@@ -110,7 +110,7 @@ export default {
             this.$emit('awardbadge', {"data":""})
         },
         saythings_modal() {
-            this.$emit('saythanks', {"data":""})
+            this.$emit('saythanks', {"data":this.people_array})
         },
         get_people() {
             fetch(this.host + 'get_people', {

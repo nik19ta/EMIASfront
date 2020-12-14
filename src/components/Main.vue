@@ -8,7 +8,7 @@
     <Modal v-if="modal" :data='data_for_modal' @tomodal='to_modal' />
     <ShareIdea :host='this.host'  v-if="is_share_idea" :data='data_for_share_idea' @shareidea='shareidea' @updateideas='updateideas' />
     <BulletinOfTheProject :host='this.host'  @tomodal='to_modal' @shareidea='shareidea' :ideas_array='ideas_array' />
-    <SayThanks v-if="is_say_thanks"  @saythanks='saythanks' />
+    <SayThanks :host='this.host' v-if="is_say_thanks"  @saythanks='saythanks' :say_thanks_array='say_thanks_array'/>
     <AwardBadge v-if="is_awardbadge"  @awardbadge='awardbadge' />
     <ProjectProgressBar :host='this.host' @saythanks='saythanks' @awardbadge='awardbadge' />
     <GiftsProject/>
@@ -42,7 +42,7 @@ export default {
       is_reg: false,
       is_say_thanks: false,
       is_awardbadge: false,
-      is_say_thanks_array: {},
+      say_thanks_array: {},
       modal: false,
       data_for_modal: {},
       data_for_share_idea: {},
@@ -100,7 +100,7 @@ export default {
     saythanks(data) {
       this.is_say_thanks = !this.is_say_thanks;
       if (data) {
-        this.data_for_share_idea = data;
+        this.say_thanks_array = data;
         document.body.style.overflowY = 'hidden';
       } else {
         document.body.style.overflowY = 'auto';
