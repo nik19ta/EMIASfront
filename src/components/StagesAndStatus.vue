@@ -259,17 +259,11 @@ export default {
 
     color: #00A560;
 }
-@media screen and (min-width: 1900px) {
+@media screen and (min-width: 1550px) {
     .Status{
-        min-width: 1700px;
-        max-width: 1700px;
+        min-width: 1550px;
+        max-width: 1550px;
 
-    }    
-}
-@media screen and (min-width: 1600px) {
-    .Status{
-        min-width: 1700px;
-        max-width: 1700px;
     }    
 }
 </style>

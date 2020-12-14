@@ -57,16 +57,11 @@
 
     color: #2B2B2B;
 }
-@media screen and (min-width: 1900px) {
+@media screen and (min-width: 1550px) {
     .header{
-        min-width: 1700px;
-        max-width: 1700px;
-    }    
-}
-@media screen and (min-width: 1600px) {
-    .header{
-        min-width: 1700px;
-        max-width: 1700px;
+        min-width: 1550px;
+        max-width: 1550px;
+
     }    
 }
 </style>

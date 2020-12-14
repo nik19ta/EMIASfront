@@ -4,11 +4,10 @@
             <p class="title"> Подарки проекта</p>
 
             <div class="card" >
-                <img class="img" src="../assets/png/1.png" alt="">
-                <img class="img" src="../assets/png/2.png" alt="">
-                <img class="img" src="../assets/png/3.png" alt="">
-                <img class="img" src="../assets/png/4.png" alt="">
-                <img class="img" src="../assets/png/2.png" alt="">
+                <img class="img" src="../assets/png/Bobromania_shop.png" alt="">
+                <img class="img" src="../assets/png/Bobromania_shop_2.png" alt="">
+                <img class="img" src="../assets/png/Bobromania_shop_3.png" alt="">
+                <img class="img" src="../assets/png/croc_t_shirt_noman.jpg" alt="">
             </div>
         </div>
     </div>
@@ -45,18 +44,13 @@
 }
 .img{
     margin-left: 9.5px;
+    width: 190px
 }
-@media screen and (min-width: 1900px) {
+@media screen and (min-width: 1550px) {
     .Status{
-        min-width: 1700px;
-        max-width: 1700px;
+        min-width: 1550px;
+        max-width: 1550px;
 
-    }    
-}
-@media screen and (min-width: 1600px) {
-    .Status{
-        min-width: 1700px;
-        max-width: 1700px;
     }    
 }
 </style>

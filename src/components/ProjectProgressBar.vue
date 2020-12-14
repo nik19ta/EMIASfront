@@ -282,17 +282,12 @@ export default {
 .opened {
     transform: rotate(180deg);
 }
-@media screen and (min-width: 1900px) {
-    .ProgressBar{
-        min-width: 1700px;
-        max-width: 1700px;
 
-    }    
-}
-@media screen and (min-width: 1600px) {
+@media screen and (min-width: 1550px) {
     .ProgressBar{
-        min-width: 1700px;
-        max-width: 1700px;
+        min-width: 1550px;
+        max-width: 1550px;
+
     }    
 }
 button {

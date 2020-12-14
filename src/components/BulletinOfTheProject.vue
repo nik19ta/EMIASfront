@@ -296,16 +296,12 @@ export default {
 
     color: #00A560;
 }
-@media screen and (min-width: 1900px) {
+
+@media screen and (min-width: 1550px) {
     .Project{
-        min-width: 1700px;
-        max-width: 1700px;
-    }    
-}
-@media screen and (min-width: 1600px) {
-    .Project{
-        min-width: 1700px;
-        max-width: 1700px;
+        min-width: 1550px;
+        max-width: 1550px;
+
     }    
 }
 </style>
