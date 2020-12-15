@@ -38,7 +38,7 @@ export default {
         },
         submit(event) {
             event.preventDefault();
-            fetch(this.host + 'login', {
+            fetch(this.host + 'registration', {
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
@@ -46,14 +46,21 @@ export default {
                     method: "POST",
                     body: JSON.stringify({
                         login: document.querySelector('#login').value,
-                        password: document.querySelector('#password').value
+                        password: document.querySelector('#password').value,
+                        email: document.querySelector('#email').value
                     })
                 })
                 .then(response => response.text())
                 .then((response) => {
-                    console.log(response)
-
-                    alert('Не верный логин или пароль')
+                    if (JSON.parse(response).status == 'not a unique login') {
+                        alert("Пользователь с таким логином уже зарегистрирован.")
+                    } else if (JSON.parse(response).status == 'ok') {
+                        alert("Вы успешно зарегестрировались")
+                        document.cookie = `user=${JSON.parse(response)['cookie']}`;
+                    } else {
+                        alert('error')
+                    }
+                    console.log(response);
                 })
                 .catch(err => console.log(err))
         },

@@ -13,8 +13,8 @@ export default {
   },
   data: function() {
     return {
-      // host: "http://localhost:3000/"
-      host: "http://165.22.192.121:3000/"
+      host: "http://localhost:3000/"
+      // host: "http://165.22.192.121:3000/"
     }
   },
   mounted() {

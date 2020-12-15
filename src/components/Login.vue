@@ -21,7 +21,9 @@ export default {
     data: function () {
         return {
             actual_stage: 0,
-            stages: 0
+            stages: 0,
+            name: "",
+            role: ""
         }
     },
     mounted() {},
@@ -52,6 +54,7 @@ export default {
                 .then((response) => {
                     console.log(response)
                     if (JSON.parse(response).status == 'ok') {
+                        document.cookie = `user=${JSON.parse(response)['cookie']}`;
                         alert('Вы успешно вошли')
                     } else {
                         alert('Не верный логин или пароль')
@@ -63,6 +66,20 @@ export default {
             console.log(1);
             this.$emit('tologin', false)
         },
+    },
+    watch: {
+        // set_data(role,name,photo, id) {
+        //     localStorage.role = role;
+        //     localStorage.name = name;
+        //     localStorage.photo = photo;
+        //     localStorage.id = id;
+        // },
+        role(new_role) {
+            localStorage.role = new_role;
+        },
+        name(new_name) {
+            localStorage.name = new_name;
+        }
     }
 }
 </script>
