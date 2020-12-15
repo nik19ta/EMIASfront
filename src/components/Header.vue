@@ -3,7 +3,7 @@
         <img class="logo" src="../assets/logo.svg" alt="">
 
         <div class="exit_and_profile" >
-            <img v-on:click="to_login" class="cursor" src="../assets/mdi_perm_identity.svg" alt="">
+            <img v-if="is_name" v-on:click="to_prof" class="cursor" src="../assets/mdi_perm_identity.svg" alt="">
             <img v-on:click="to_login" class="cursor" src="../assets/mdi_exit_to_app.svg" alt="">
         </div>
     </div>
@@ -17,15 +17,17 @@ export default {
     data: function () {
         return {
             actual_stage: 0,
-            stages: 0
+            stages: 0,
+            is_name: false
         }
     },
-    mounted() {},
+    mounted() {
+        if (localStorage.name != undefined) {this.is_name = true;}
+        else {this.is_name = false;}
+    },
     methods: {
-        to_login() {
-            console.log(1);
-            this.$emit('tologin', true)
-        },
+        to_login() {this.$emit('tologin', true)},
+        to_prof() {this.$emit('toprof', true)}
     }
 }
 </script>

@@ -1,8 +1,9 @@
 <template>
   <div class="main" >
     <Login :host='this.host' v-if="is_login" @tologin='to_login' @toreg='toReg' />  
+    <Profile @toprof='toprof' :host='this.host' v-if="is_prof" />
     <Registration :host='this.host' v-if="is_reg" @tologin='to_login' @toreg='toReg' />  
-    <Header @tologin='to_login' />
+    <Header @tologin='to_login' @toprof='toprof' />
     <SubHeader/>
     <StagesAndStatus :host='this.host' />
     <Modal v-if="modal" :data='data_for_modal' @tomodal='to_modal' />
@@ -25,6 +26,7 @@ import BulletinOfTheProject from './BulletinOfTheProject.vue'
 import ProjectProgressBar from './ProjectProgressBar.vue'
 import GiftsProject from './GiftsProject.vue'
 import Login from './Login.vue'
+import Profile from './Profile'
 import ShareIdea from './ShareIdea'
 import SayThanks from './SayThanks'
 import AwardBadge from './AwardBadge'
@@ -39,6 +41,7 @@ export default {
   data() {
     return {
       is_login: false,
+      is_prof: false,
       is_reg: false,
       is_say_thanks: false,
       is_awardbadge: false,
@@ -63,13 +66,19 @@ export default {
     Modal,
     ShareIdea,
     SayThanks,
-    AwardBadge
+    AwardBadge,
+    Profile
   }, 
   mounted() {
     this.get_ideas()
     this.autu_login()
   },
   methods: {
+    toprof(data) {
+      this.is_prof = !this.is_prof;
+      if (data) {document.body.style.overflowY = 'hidden';} 
+      else {document.body.style.overflowY = 'auto';}
+    },
     autu_login() {
         fetch(this.host + 'auto_login', {
                 headers: {

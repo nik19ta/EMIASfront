@@ -23,7 +23,6 @@ export default {
             actual_stage: 0,
             stages: 0,
             name: "",
-            role: ""
         }
     },
     mounted() {},
@@ -55,6 +54,8 @@ export default {
                     console.log(response)
                     if (JSON.parse(response).status == 'ok') {
                         document.cookie = `user=${JSON.parse(response)['cookie']}`;
+                        console.log(JSON.parse(response)['data']['name']);
+                        this.name = JSON.parse(response)['data']['name'];
                         alert('Вы успешно вошли')
                     } else {
                         alert('Не верный логин или пароль')
@@ -68,15 +69,6 @@ export default {
         },
     },
     watch: {
-        // set_data(role,name,photo, id) {
-        //     localStorage.role = role;
-        //     localStorage.name = name;
-        //     localStorage.photo = photo;
-        //     localStorage.id = id;
-        // },
-        role(new_role) {
-            localStorage.role = new_role;
-        },
         name(new_name) {
             localStorage.name = new_name;
         }
