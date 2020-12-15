@@ -16,8 +16,8 @@
                     <p>Пока что нет.</p>
                 </div>
         </div>
-        <div class="Like">{{people.like.length}}</div>
-        <div class="Ideas">{{people.ideas.length}}</div>
+        <div class="Like"> <img class="like_img" src="../assets/heart.svg" alt=""> {{people.like.length}}</div>
+        <div class="Ideas" > <img class="like_img" src="../assets/lightbulb.svg" alt=""> {{people.ideas.length}}</div>
         <div class="Thanks">{{people.thanks.length}}</div>
     </div>
 </template>
@@ -87,11 +87,17 @@
 }
  .Like{
     width: 10%;
+    /* display: flex;
+    align-items:flex-end;
+    gap: 10px; */
 }
  .Ideas{
     width: 10%;
 }
 .Thanks{
     width: 12%;
+}
+.like_img{
+    width: 25px;
 }
 </style>
