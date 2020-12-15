@@ -9,7 +9,7 @@
     <ShareIdea :host='this.host'  v-if="is_share_idea" :data='data_for_share_idea' @shareidea='shareidea' @updateideas='updateideas' />
     <BulletinOfTheProject :host='this.host'  @tomodal='to_modal' @shareidea='shareidea' :ideas_array='ideas_array' />
     <SayThanks :host='this.host' v-if="is_say_thanks"  @saythanks='saythanks' :say_thanks_array='say_thanks_array'/>
-    <AwardBadge v-if="is_awardbadge"  @awardbadge='awardbadge' />
+    <AwardBadge :host='this.host' v-if="is_awardbadge" :awardbadge_array='awardbadge_array'  @awardbadge='awardbadge' />
     <ProjectProgressBar :host='this.host' @saythanks='saythanks' @awardbadge='awardbadge' />
     <GiftsProject/>
   </div>
@@ -42,6 +42,7 @@ export default {
       is_reg: false,
       is_say_thanks: false,
       is_awardbadge: false,
+      awardbadge_array: {},
       say_thanks_array: {},
       modal: false,
       data_for_modal: {},
@@ -66,8 +67,23 @@ export default {
   }, 
   mounted() {
     this.get_ideas()
+    this.autu_login()
   },
   methods: {
+    autu_login() {
+        fetch(this.host + 'auto_login', {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "POST"
+            })
+            .then(response => response.text())
+            .then((response) => { 
+                console.log(JSON.parse(response));
+            })
+            .catch(err => console.log(err))
+    },
     get_ideas() {
             fetch(this.host + 'get_ideas', {
                 headers: {
@@ -109,6 +125,7 @@ export default {
     awardbadge(data) {
       this.is_awardbadge = !this.is_awardbadge;
       if (data) {
+        this.awardbadge_array = data;
         document.body.style.overflowY = 'hidden';
       } else {
         document.body.style.overflowY = 'auto';

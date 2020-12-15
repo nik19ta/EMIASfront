@@ -6,12 +6,19 @@
                 <button class="close" v-on:click="closed" >×</button> <br/>
             </div>
             <div class="content" >
-                <input type="text" class="input" placeholder="Начните вводить имя сотрудника" >
-                <!-- <textarea v-model="text" name="" id="" placeholder="Введите текст" >
-                </textarea> -->
-                <p>Доступные бэйджи для вручения:</p>
+                <select id='people' class="input select ">
+                    <option :value='item.name' v-for='item in awardbadge_array.data' :key='item.name' >{{item.name}}</option>
+                </select>
+
+                <p>Выберите бейдж который хотите вручить</p>
+                <div class="assets_b" >
+                    <span v-for="i in 11" :key="i">
+                        <img v-bind:class="badge == i ? 'active' : 'an'" @click="chenge_b(i)" class="icon" :src="require(`../assets/png_for_BulletinOfTheProject/${i}.svg`)" alt="">
+                    </span>
+                </div>
+
                 <div class="btns_inline" >
-                    <button v-on:click="say" class="btn" >Отправить</button>
+                    <button v-bind:class="badge < 1 ? 'dis_clacc' : ''" v-on:click="say" class="btn" >Вручить</button>
                     <button v-on:click="closed"  class="btn cancel " >Отмена</button>
                 </div>
             </div>
@@ -22,18 +29,51 @@
 <script>
 export default {
     props: {
-        data: {},
+        awardbadge_array: {},
         host: {}
     },
     data: function () {
         return {
-            text: ''
+            text: '',
+            badge: 0
         }
     },
     mounted() {},
     methods: {
+        chenge_b(data) {
+            if (this.badge == data) {
+                this.badge = 0;
+            } else {
+                this.badge = data;
+            }
+        },
         say() {
-            this.$emit('awardbadge')
+            if (this.badge < 1) {
+                alert('Бэйдж не выбран!')
+            } else {
+                fetch(this.host + 'award_badge', {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    method: "POST",
+                    body: JSON.stringify({
+                        from: "user..",
+                        badge: this.badge,
+                        to: document.querySelector('#people').value
+                    })
+                })
+                .then(response => response.text())
+                .then((response) => { 
+                    console.log(response) 
+                    if (JSON.parse(response).status == 'ok') {
+                        alert('Успех')
+                        this.$emit('awardbadge')
+                    }
+                })
+                .catch(err => console.log(err))
+            }
+
         },
         closed() {
             this.$emit('awardbadge')
@@ -187,5 +227,29 @@ form{
     border-radius: 10px;
     border: 0;
     font-size: 18px;
+}
+.icon{
+    width: 45px;
+    cursor: pointer;
+    transition:width .3s, margin 0.2s;
+}
+.assets_b{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    height: 25%;
+}
+.assets_b p{
+    width: 100%;
+    text-align: center;
+}
+.active{
+    width: 65px;
+    margin-top: -10px;
+    margin-right: 0px;
+}
+.dis_clacc{
+    color: gray;
 }
 </style>

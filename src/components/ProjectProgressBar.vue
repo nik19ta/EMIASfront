@@ -107,7 +107,7 @@ export default {
     },
     methods: {
         awardbadge() {
-            this.$emit('awardbadge', {"data":""})
+            this.$emit('awardbadge', {"data":this.people_array})
         },
         saythings_modal() {
             this.$emit('saythanks', {"data":this.people_array})
