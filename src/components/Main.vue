@@ -75,9 +75,13 @@ export default {
   },
   methods: {
     toprof(data) {
-      this.is_prof = !this.is_prof;
-      if (data) {document.body.style.overflowY = 'hidden';} 
-      else {document.body.style.overflowY = 'auto';}
+      if (document.cookie == 'user=false') {
+        this.to_login({"data": "data"})
+      } else {
+        this.is_prof = !this.is_prof;
+        if (data) {document.body.style.overflowY = 'hidden';} 
+        else {document.body.style.overflowY = 'auto';}
+      }
     },
     autu_login() {
         fetch(this.host + 'auto_login', {
