@@ -91,7 +91,9 @@ export default {
                 .then(response => response.text())
                 .then((response) => {
                     if (JSON.parse(response).status == 'ok') {
-                        this.loader_up = false
+                        setTimeout(() => {
+                            this.loader_up = false
+                        }, 300)
                     } else {
                         this.loader_up = false
                     }
