@@ -2,7 +2,7 @@
     <div v-if="people.role == role" class="user">
         <div class="name">
             <div v-if="people.photo == null" class="avatar"></div>
-            <div v-else> <img :src="people.photo" alt=""> </div>
+            <div v-else> <img class="image_avatar" :src="people.photo" alt=""> </div>
             <div class="people_name">{{people.name}}</div>
         </div>
         <div class="Badges">
@@ -58,10 +58,10 @@
 .avatar{
     width: 50px;
     height: 50px;
+    border-radius: 100px;
     background: -webkit-linear-gradient(45deg, rgb(0, 165, 96), rgb(0, 158, 165) 65%);
     background: -moz-linear-gradient(45deg, rgb(0, 165, 96), rgb(0, 158, 165) 65%);
     background: linear-gradient(45deg, rgb(0, 165, 96), rgb(0, 158, 165) 65%);
-    border-radius: 100px;
 }
 .people_name {
     margin-left: 10px;
@@ -99,5 +99,10 @@
 }
 .like_img{
     width: 25px;
+}
+.image_avatar{
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
 }
 </style>

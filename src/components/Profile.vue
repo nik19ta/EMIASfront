@@ -1,6 +1,9 @@
 <template>
     <div class="login" >
         <div class="ModalWindow" >
+            <div v-if="loader_up" class="loader_bc" >
+                <Loader v-if="loader_up" />
+            </div>
             <h2 class="title" >Профиль</h2>
             <button class="close" v-on:click="closed" >×</button> <br/>
             <button class="exit_from_acc" v-on:click="exit" >Выйти из аккаунта</button> <br/>
@@ -10,8 +13,9 @@
             <div v-if="user_data != null && fetch_is > 0" class="content" >  
                 <div class="info" >
                     <div class="avatar_div" >
-                        <div class="avatar" v-if="user_data.data.photo == null" ></div>
-                        <img v-if="user_data.data.photo != null" :src="user_data.data.photo" alt="">
+                        <div id="avatar" class="avatar" v-if="user_data.data.photo == null" ></div>
+                        <img class="avatar_img" v-if="user_data.data.photo != null" :src="user_data.data.photo" alt="">
+                        <input type="file" @change="previewFiles" multiple placeholder="Поменять аватар" > 
                     </div>
                     <div class="main_info" >
                         <p>{{user_data.data.name}}</p>
@@ -50,13 +54,52 @@ export default {
             stages: 0,
             name: "",
             user_data: null,
-            fetch_is: 0
+            fetch_is: 0,
+            loader_up: false
         }
     },
     mounted() {
         this.get_info()
     },
     methods: {
+        async previewFiles(event) {
+            const toBase64 = file => new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+            });
+            this.user_data.data.photo = await toBase64(event.target.files[0]);
+            this.chenge(this.user_data.data.photo)    
+        },
+        chenge(img_data) {
+            console.log(img_data);
+            this.loader_up = true
+
+            fetch(this.host + 'chenge_img', {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include',
+                    mode: 'cors',
+                    method: "POST",
+                    body: JSON.stringify({
+                        img: img_data
+                    })
+                })
+                .then(response => response.text())
+                .then((response) => {
+                    if (JSON.parse(response).status == 'ok') {
+                        this.loader_up = false
+                    } else {
+                        this.loader_up = false
+                    }
+                })
+                .catch(err => console.log(err))
+
+
+        },
         exit() {
             localStorage.name = "false";
             document.cookie = `user=false`;
@@ -75,7 +118,7 @@ export default {
                 .then((response) => {
                     setTimeout(() => {
                         this.fetch_is = 1
-                    }, 500)
+                    }, 300)
                     this.user_data = JSON.parse(response);
                 })
                 .catch(err => console.log(err))
@@ -215,6 +258,11 @@ form{
     background: linear-gradient(45deg, rgb(0, 165, 96), rgb(0, 158, 165) 65%);
     border-radius: 100px;
 }
+.avatar_img{
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+}
 .info{
     display: flex;
     width: 100%;
@@ -227,5 +275,18 @@ form{
 }
 .info_p{
     margin-top: 7px;
+}
+.loader_bc{
+    background: #0002;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    border-radius: 9px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>
