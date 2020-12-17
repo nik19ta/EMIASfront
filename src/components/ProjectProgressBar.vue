@@ -154,6 +154,7 @@ export default {
     height: 200px;
     padding-left: 10px;
     padding-right: 10px;
+    overflow-y: auto;
 }
 .Team_title, .name{
     width: 30%;
