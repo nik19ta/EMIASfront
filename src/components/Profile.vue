@@ -88,7 +88,8 @@ export default {
                     mode: 'cors',
                     method: "POST",
                     body: JSON.stringify({
-                        pass: this.new_pass
+                        pass: this.new_pass,
+                        cookie: document.cookie.split('=')[1]
                     })
                 })
                 .then(response => response.text())
@@ -127,7 +128,8 @@ export default {
                     mode: 'cors',
                     method: "POST",
                     body: JSON.stringify({
-                        img: img_data
+                        img: img_data,
+                        cookie: document.cookie.split('=')[1]
                     })
                 })
                 .then(response => response.text())
