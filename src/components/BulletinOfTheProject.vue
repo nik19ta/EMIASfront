@@ -6,11 +6,11 @@
             <div class="card" >
                 <div v-if="!is_more" class="content" >
                     <div 
-                    v-for="item in data" 
-                    :key="item.title" 
-                    class="card_in_project" 
-                    :style="`background-image: url(${item.img})`" >
-                        
+                        v-for="item in data_prev"
+                        :key="item" 
+                        class="card_in_project" 
+                        :style="`background-image: url(${item.img})`" 
+                    >   
                         <div v-if="item.status" class="status" >Реализованно</div>
                         <p class="text_in_card" >{{item.title}}</p>
                     </div>
@@ -67,6 +67,7 @@ export default {
     data: function () {
         return {
             data: [],
+            data_prev: [],
             is_more: false,
         }
     },
@@ -97,6 +98,15 @@ export default {
             .then((response) => {
                 response = JSON.parse(response)
                 vm.data = response.status;
+                if (response.status.length > 4) {
+                    let prev = [];
+                    for (let i = 0; i < 4; i++) {
+                        prev.push(response.status[i])
+                    } 
+                    vm.data_prev = prev;
+                } else {
+                    vm.data_prev = response.status;
+                }
             })
             .catch(err => console.log(err))
         }
