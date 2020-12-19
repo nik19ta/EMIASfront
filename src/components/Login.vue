@@ -57,6 +57,7 @@ export default {
                         console.log(JSON.parse(response)['data']['name']);
                         this.name = JSON.parse(response)['data']['name'];
                         alert('Вы успешно вошли')
+                        this.$emit('tologin', false)
                     } else {
                         alert('Не верный логин или пароль')
                     }

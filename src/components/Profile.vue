@@ -15,13 +15,19 @@
                     <div class="avatar_div" >
                         <div id="avatar" class="avatar" v-if="user_data.data.photo == null" ></div>
                         <img class="avatar_img" v-if="user_data.data.photo != null" :src="user_data.data.photo" alt="">
-                        <input type="file" @change="previewFiles" multiple placeholder="Поменять аватар" > 
                     </div>
                     <div class="main_info" >
                         <p>{{user_data.data.name}}</p>
-                        <p>{{user_data.data.role}}</p>
+                        <p class="role" >{{user_data.data.role}}</p>
                     </div>
                 </div>
+                <input v-if="is_btn_chenge_avatar" type="file" class="input_file" @change="previewFiles" multiple placeholder="Поменять аватар" > 
+                <button v-if="!is_btn_chenge_avatar" @click="chenge_is_btn_chenge_avatar" class="input_file" > Поменять аватар </button>
+                <div class="form_div" >
+                        <button v-if="!is_btn_edit_pass" @click="chenge_btn_edit_pass" class="btn_form_div" >Поменять пароль</button>
+                        <input v-if="is_btn_edit_pass" v-model="new_pass" placeholder="Новый пароль" class="btn_form_div" type="text">
+                        <button v-if="is_btn_edit_pass" @click="pass_ok" class="btn_form_div" > ok </button>
+                    </div>
                 <p>Доступные бэйджи:</p>
                 <div class="Badges_content" >
                     <span class="Badges" v-for="item in user_data.data.Badges" :key="item.code" >
@@ -29,9 +35,13 @@
                         <span class="Badge_count" >x{{item.count}}</span>
                     </span> 
                 </div>
-                <p class="info_p" >Лайки: {{user_data.data.like.length}} </p>
-                <p class="info_p" >Идеи: {{user_data.data.ideas.length}} </p>
-                <p class="info_p" >Спасибо: {{user_data.data.thanks.length}} </p>
+                <div class="blocks">
+                    <div  >
+                        <p class="info_p" >Лайки: {{user_data.data.like.length}} </p>
+                        <p class="info_p" >Идеи: {{user_data.data.ideas.length}} </p>
+                        <p class="info_p" >Спасибо: {{user_data.data.thanks.length}} </p>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -55,13 +65,42 @@ export default {
             name: "",
             user_data: null,
             fetch_is: 0,
-            loader_up: false
+            loader_up: false,
+            is_btn_chenge_avatar: false,
+            is_btn_edit_pass: false,
+            new_pass: ''
         }
     },
     mounted() {
         this.get_info()
     },
     methods: {
+        chenge_btn_edit_pass() {this.is_btn_edit_pass = !this.is_btn_edit_pass},
+        chenge_is_btn_chenge_avatar() {this.is_btn_chenge_avatar = !this.is_btn_chenge_avatar},
+        pass_ok() {
+            this.chenge_btn_edit_pass()
+            fetch(this.host + 'passwd', {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include',
+                    mode: 'cors',
+                    method: "POST",
+                    body: JSON.stringify({
+                        pass: this.new_pass
+                    })
+                })
+                .then(response => response.text())
+                .then((response) => {
+                    if (JSON.parse(response).status == 'ok') {
+                        alert('Успех')
+                    } else {
+                        alert('Ошибка')
+                    }
+                })
+                .catch(err => console.log(err))
+        },
         async previewFiles(event) {
             const toBase64 = file => new Promise((resolve, reject) => {
                 const reader = new FileReader();
@@ -70,7 +109,10 @@ export default {
                 reader.onerror = error => reject(error);
             });
             this.user_data.data.photo = await toBase64(event.target.files[0]);
-            this.chenge(this.user_data.data.photo)    
+
+
+            this.chenge_is_btn_chenge_avatar()
+            this.chenge(this.user_data.data.photo)
         },
         chenge(img_data) {
             console.log(img_data);
@@ -99,61 +141,61 @@ export default {
                     }
                 })
                 .catch(err => console.log(err))
-
-
         },
         exit() {
-            localStorage.name = "false";
-            document.cookie = `user=false`;
+            let vm = this;
+            fetch(this.host + 'exit', {
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        credentials: 'include',
+                        method: "POST",
+                        body: JSON.stringify({"cookie":document.cookie.split('=')[1]})
+                    })
+                    .then(response => response.text())
+                    .then((response) => {
+                        console.log(JSON.parse(response)['data']);
+                        console.log('ok');
+                        console.log(JSON.parse(response)['data'] == 'ok');
+                        if (JSON.parse(response)['data'] == 'ok') {
+                            vm.closed()
+                            localStorage.name = "false";
+                            document.cookie = `user=false`;
+                        } else {
+                            alert('Error')
+                        }
+                    })
+                    .catch(err => console.log(err))
+
         },
         get_info() {
-            fetch(this.host + 'information_about_user', {
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    credentials: 'include',
-                    mode: 'cors',
-                    method: "POST"
-                })
-                .then(response => response.text())
-                .then((response) => {
-                    setTimeout(() => {
-                        this.fetch_is = 1
-                    }, 300)
-                    this.user_data = JSON.parse(response);
-                })
-                .catch(err => console.log(err))
+            if (document.cookie.split('=')[1] == "false") {
+                this.$emit('tologinfromlk')
+            } else {
+                fetch(this.host + 'information_about_user', {
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        credentials: 'include',
+                        method: "POST",
+                        body: JSON.stringify({"cookie":document.cookie.split('=')[1]})
+                    })
+                    .then(response => response.text())
+                    .then((response) => {
+                        if (!JSON.parse(response)['data']) {
+                            this.$emit('tologinfromlk')
+                        } else {
+                            this.fetch_is = 1
+                            this.user_data = JSON.parse(response);
+                        }
+                    })
+                    .catch(err => console.log(err))
+            }
         },
         closed() {
             this.$emit('toprof')
-        },
-        submit(event) {
-            event.preventDefault();
-            // fetch(this.host + 'login', {
-            //         headers: {
-            //             'Accept': 'application/json',
-            //             'Content-Type': 'application/json'
-            //         },
-            //         method: "POST",
-            //         body: JSON.stringify({
-            //             login: document.querySelector('#login').value,
-            //             password: document.querySelector('#password').value
-            //         })
-            //     })
-            //     .then(response => response.text())
-            //     .then((response) => {
-            //         console.log(response)
-            //         if (JSON.parse(response).status == 'ok') {
-            //             document.cookie = `user=${JSON.parse(response)['cookie']}`;
-            //             console.log(JSON.parse(response)['data']['name']);
-            //             this.name = JSON.parse(response)['data']['name'];
-            //             alert('Вы успешно вошли')
-            //         } else {
-            //             alert('Не верный логин или пароль')
-            //         }
-            //     })
-            //     .catch(err => console.log(err))
         },
     }
 }
@@ -197,6 +239,7 @@ button{
     color: #fff;
     margin-top: 30px;
     text-align: center;
+    cursor: pointer;
 }
 
 form{
@@ -270,7 +313,7 @@ form{
     width: 100%;
     justify-content: space-between;
     align-items: flex-start;
-    padding-bottom: 30px;
+    padding-bottom: 5px;
 }
 .main_info{
     width: calc(100% - 100px - 20px);
@@ -290,5 +333,28 @@ form{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.input_file{
+    margin: 0;
+}
+.role{
+    margin-top: 10px;
+}
+.blocks{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.form_div{
+    width: 250px;
+    display: flex;
+    align-items: flex-end;
+    height: 35px;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.btn_form_div{
+    width: 100%;
 }
 </style>

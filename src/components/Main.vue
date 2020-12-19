@@ -1,7 +1,7 @@
 <template>
   <div class="main" >
     <Login :host='this.host' v-if="is_login" @tologin='to_login' @toreg='toReg' />  
-    <Profile @toprof='toprof' :host='this.host' v-if="is_prof" />
+    <Profile @tologinfromlk='tologinfromlk' @toprof='toprof' :host='this.host' v-if="is_prof" />
     <Registration :host='this.host' v-if="is_reg" @tologin='to_login' @toreg='toReg' />  
     <Header @tologin='to_login' @toprof='toprof' />
     <SubHeader/>
@@ -74,6 +74,10 @@ export default {
     this.autu_login()
   },
   methods: {
+    tologinfromlk() {
+      this.is_login = true;
+      this.is_prof = false;
+    },
     toprof(data) {
       if (document.cookie == 'user=false') {
         this.to_login({"data": "data"})

@@ -13,6 +13,7 @@ export default {
   },
   data: function() {
     return {
+      // host: "http://194.242.120.106:3000/"
       host: "http://localhost:3000/"
       // host: "http://165.22.192.121:3000/"
     }
