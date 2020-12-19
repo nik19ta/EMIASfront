@@ -2,12 +2,20 @@
     <div class="StagesAndStatus" >
         <div class="Status" >
             <p class="title"> Подарки проекта</p>
-
             <div class="card" >
-                <img class="img" src="../assets/png/Bobromania_shop.png" alt="">
-                <img class="img" src="../assets/png/Bobromania_shop_2.png" alt="">
-                <img class="img" src="../assets/png/Bobromania_shop_3.png" alt="">
-                <img class="img" src="../assets/png/croc_t_shirt_noman.jpg" alt="">
+                <div class="content_for_photo" >
+                    <p>Если ты в команде ЕМИАС</p>
+                    <img class="img" src="../assets/png/Bobromania_shop_2.png" alt="">
+                </div>
+                <div class="content_for_photo" >
+                    <p>Если ты поделился лайфхаком/идеей</p>
+                    <img class="img" src="../assets/png/Bobromania_shop_3.png" alt="">
+                    <img class="img" src="../assets/png/Bobromania_shop.png" alt="">
+                </div>
+                <div class="content_for_photo" >
+                    <p>Если у тебя два бэйджа</p>
+                    <img class="img" src="../assets/png/croc_t_shirt_noman1.png" alt="">
+                </div>
             </div>
         </div>
     </div>
@@ -41,10 +49,24 @@
     /* height: 220px; */
 
     position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .img{
     margin-left: 9.5px;
     width: 190px
+}
+.content_for_photo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.content_for_photo p{
+    font-size: 18px;
+    width: 100%;
+    text-align: center;
 }
 @media screen and (min-width: 1550px) {
     .Status{
