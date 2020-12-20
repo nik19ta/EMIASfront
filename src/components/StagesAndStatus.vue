@@ -266,4 +266,10 @@ export default {
 
     }    
 }
+@media screen and (max-width: 850px) {
+    .Status{
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
 </style>

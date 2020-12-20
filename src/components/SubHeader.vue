@@ -1,10 +1,10 @@
 <template>
-    <div class="sub_header" >
-        <div class="header" >
-            <div class="text_box" >
-                <p class="text" >Проект, который создает добро</p>
+    <div class="sub_header">
+        <div class="header">
+            <div class="text_box">
+                <p class="text">Проект, который создает добро</p>
             </div>
-            <div class="image_box" >
+            <div class="image_box">
                 <img src="../assets/sub_header_image.svg" alt="">
             </div>
         </div>
@@ -37,12 +37,14 @@
 }
 .image_box{
     width: 40%;
+    /* margin-right: 50px; */
 }
 .text_box, 
 .image_box {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
+    padding-right: 50px;
 }
 .text{
     font-family: Croc;
@@ -57,11 +59,39 @@
 
     color: #2B2B2B;
 }
+
 @media screen and (min-width: 1550px) {
-    .header{
+    .header {
         min-width: 1550px;
         max-width: 1550px;
 
-    }    
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .text{
+        margin-left: 30px;
+    }
+}
+@media screen and (max-width: 650px) {
+    .sub_header {
+        position: relative;
+    }
+    .image_box {
+        position: absolute;
+        right:10px;
+        top: 0px;
+        opacity: .3;
+        width: 90%;
+    }
+
+    .text_box {
+        width: 100%;
+        z-index: 1;
+    }
+    img {
+        max-width: 300px;
+        min-width: 300px;
+    }
 }
 </style>

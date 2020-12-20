@@ -18,7 +18,6 @@
                     <div class="Ideas_title" >Идеи</div>
                     <div class="Thanks_title" >Спасибо</div>
                 </div>
-                <!-- ... -->
 
                 <div class="row" @click='open(1)' >
                     <p>Администраторы</p>
@@ -284,6 +283,10 @@ export default {
     transform: rotate(180deg);
 }
 
+button {
+    cursor: pointer;
+}
+
 @media screen and (min-width: 1550px) {
     .ProgressBar{
         min-width: 1550px;
@@ -291,8 +294,28 @@ export default {
 
     }    
 }
-button {
-    cursor: pointer;
+@media screen and (max-width: 850px) {
+    .ProgressBar{
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
+@media screen and (max-width: 750px) {
+    .Team_title, .name{
+    width: 30%;
+    }
+    .Badges_title, .Badges{
+        width: 31%;
+    }
+    .Like_title, .Like{
+        width: 14%;
+    }
+    .Ideas_title, .Ideas{
+        width: 14%;
+    }
+    .Thanks_title, .Thanks{
+        width: 11%;
+    }
 }
 </style>
     

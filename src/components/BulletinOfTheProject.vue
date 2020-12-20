@@ -311,8 +311,13 @@ export default {
     .Project{
         min-width: 1550px;
         max-width: 1550px;
-
     }    
+}
+@media screen and (max-width: 850px) {
+    .Project{
+        padding-left: 30px;
+        padding-right: 30px;
+}
 }
 </style>
     
