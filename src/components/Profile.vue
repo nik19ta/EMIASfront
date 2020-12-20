@@ -36,10 +36,11 @@
                     </span> 
                 </div>
                 <div class="blocks">
-                    <div  >
+                    <div>
                         <p class="info_p" >Лайки: {{user_data.data.like.length}} </p>
                         <p class="info_p" >Идеи: {{user_data.data.ideas.length}} </p>
                         <p class="info_p" >Спасибо: {{user_data.data.thanks.length}} </p>
+                        <p class="info_p" >Очки: {{user_data.data.points}} </p>
                     </div>
                 </div>
             </div>
