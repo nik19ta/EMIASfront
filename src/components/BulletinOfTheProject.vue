@@ -317,7 +317,13 @@ export default {
     .Project{
         padding-left: 30px;
         padding-right: 30px;
+    }
 }
+@media screen and (max-width: 465px) {
+    .Project{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
 }
 </style>
     
