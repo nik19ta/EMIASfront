@@ -305,7 +305,7 @@ button {
     width: 30%;
     }
     .Badges_title, .Badges{
-        width: 31%;
+        width: 27%;
     }
     .Like_title, .Like{
         width: 14%;
@@ -315,6 +315,12 @@ button {
     }
     .Thanks_title, .Thanks{
         width: 11%;
+    }
+}
+@media screen and (max-width: 465px) {
+    .ProgressBar{
+        padding-left: 10px;
+        padding-right: 10px;
     }
 }
 </style>

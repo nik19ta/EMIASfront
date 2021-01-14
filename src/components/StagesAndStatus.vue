@@ -13,9 +13,9 @@
                         <p class="text">Старт</p>
                     </div>
                     <div class="progress" >
-                        <div v-for="i in stages" :key="i" :class="[i < stages ? 'item' : '']" >
+                        <div :style="`width: calc(100%/${stages.length}))`" v-for="i in stages" :key="i" :class="[i < stages ? 'item' : '']" >
                             <div class="point" :class="[i == actual_stage ? 'now_point' : i < actual_stage ? 'done_point' : 'not_point']" ></div>
-                            <div v-if="i < stages" class="line" :class="[i < actual_stage ? 'done_line' : 'not_line']"  ></div>
+                            <div :style="`width: calc(100% - 30px)`" v-if="i < stages" class="line" :class="[i < actual_stage ? 'done_line' : 'not_line']"  ></div>
                         </div>
                     </div>
                     <div class="content_div" >
@@ -112,15 +112,15 @@ export default {
     align-items: center;
 }
 .line{
-    width: calc((100% - 60px - 60px)/10);
+    /* width: calc((100% - 60px - 60px)/10); */
 }
 .done_line{
     background: #00A560;
-    width: 70%;
+    /* width: 70%; */
 }
 .not_line {
     background: #C4C4C4;
-    width: 70%;
+    /* width: 70%; */
 }
 .done_point{
     background: #00A560;
@@ -167,7 +167,6 @@ export default {
 .progress{
     width: calc(100% - 60px - 60px);
     height: 2px;
-    /* background: #00A560; */
     display: flex;
     justify-content: space-between;
 }
@@ -270,6 +269,21 @@ export default {
     .Status{
         padding-left: 30px;
         padding-right: 30px;
+    }
+}
+@media screen and (max-width: 465px) {
+    .Status{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .point{
+        width: 14px;
+        height: 14px;
+    }
+    .content{
+        margin-top: 45px;
+        padding-left: 00px;
+        padding-right: 00px;
     }
 }
 </style>

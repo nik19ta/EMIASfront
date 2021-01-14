@@ -65,4 +65,10 @@
         padding-right: 20px;
     }
 }
+@media screen and (max-width: 465px) {
+    .header {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
 </style>

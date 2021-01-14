@@ -2,7 +2,7 @@
     <div class="sub_header">
         <div class="header">
             <div class="text_box">
-                <p class="text">Проект, который создает добро</p>
+                <p class="text">КИС ЕМИАС - дорога в цифровое будущее</p>
             </div>
             <div class="image_box">
                 <img src="../assets/sub_header_image.svg" alt="">
@@ -79,12 +79,11 @@
     }
     .image_box {
         position: absolute;
-        right:10px;
+        right: 0px;
         top: 0px;
         opacity: .3;
         width: 90%;
     }
-
     .text_box {
         width: 100%;
         z-index: 1;
@@ -92,6 +91,11 @@
     img {
         max-width: 300px;
         min-width: 300px;
+    }
+}
+@media screen and (max-width: 465px) {
+    .text{
+        margin-left: 10px;
     }
 }
 </style>
