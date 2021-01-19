@@ -10,9 +10,10 @@
     <ShareIdea :host='this.host'  v-if="is_share_idea" :data='data_for_share_idea' @shareidea='shareidea' @updateideas='updateideas' />
     <BulletinOfTheProject :host='this.host'  @tomodal='to_modal' @shareidea='shareidea' :ideas_array='ideas_array' />
     <SayThanks :host='this.host' v-if="is_say_thanks"  @saythanks='saythanks' :say_thanks_array='say_thanks_array'/>
+    <Buy :host='this.host' v-if="is_buy" :data='data_buy' @buy='buyfunc' />
     <AwardBadge :host='this.host' v-if="is_awardbadge" :awardbadge_array='awardbadge_array'  @awardbadge='awardbadge' />
     <ProjectProgressBar :host='this.host' @saythanks='saythanks' @awardbadge='awardbadge' />
-    <GiftsProject/>
+    <GiftsProject @buy='buyfunc' />
   </div>
 </template>
 
@@ -29,6 +30,7 @@ import Login from './Login.vue'
 import Profile from './Profile'
 import ShareIdea from './ShareIdea'
 import SayThanks from './SayThanks'
+import Buy from './Buy'
 import AwardBadge from './AwardBadge'
 
 
@@ -45,6 +47,8 @@ export default {
       is_reg: false,
       is_say_thanks: false,
       is_awardbadge: false,
+      is_buy: false,
+      data_buy: {},
       awardbadge_array: {},
       say_thanks_array: {},
       modal: false,
@@ -67,13 +71,26 @@ export default {
     ShareIdea,
     SayThanks,
     AwardBadge,
-    Profile
+    Profile,
+    Buy
   }, 
   mounted() {
     this.get_ideas()
     this.autu_login()
   },
   methods: {
+    buyfunc(data) {
+      console.log('elem in main ', data.data);
+
+      this.is_buy =!this.is_buy
+      if (data) {
+        this.data_buy = data.data;
+        document.body.style.overflowY = 'hidden';
+      } else {
+        document.body.style.overflowY = 'auto';
+      }
+
+    },
     tologinfromlk() {
       this.is_login = true;
       this.is_prof = false;

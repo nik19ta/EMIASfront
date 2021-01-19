@@ -111,9 +111,6 @@ export default {
     justify-content: center;
     align-items: center;
 }
-.line{
-    /* width: calc((100% - 60px - 60px)/10); */
-}
 .done_line{
     background: #00A560;
     /* width: 70%; */

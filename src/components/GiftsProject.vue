@@ -5,16 +5,16 @@
             <div class="card">
                 <div class="content_for_photo">
                     <p>Если ты в команде ЕМИАС</p>
-                    <img class="img" src="../assets/png/Bobromania_shop_2.png" alt="">
+                    <img class="img" v-on:click='buy(1)' src="../assets/png/Bobromania_shop_2.png" alt="">
                 </div>
                 <div class="content_for_photo">
                     <p>Если у тебя два бэйджа</p>
-                    <img class="img" src="../assets/png/croc_t_shirt_noman1.png" alt="">
+                    <img class="img" v-on:click='buy(2)' src="../assets/png/croc_t_shirt_noman1.png" alt="">
                 </div>
                 <div class="content_for_photo">
                     <p>Если ты поделился лайфхаком/идеей</p>
-                    <img class="img" src="../assets/png/Bobromania_shop_3.png" alt="">
-                    <img class="img" src="../assets/png/Bobromania_shop.png" alt="">
+                    <img class="img" v-on:click='buy(3)' src="../assets/png/Bobromania_shop_3.png" alt="">
+                    <img class="img" v-on:click='buy(4)' src="../assets/png/Bobromania_shop.png" alt="">
                 </div>
             </div>
         </div>
@@ -22,6 +22,13 @@
 </template>
 
 <script>
+export default {
+    methods: {
+        buy(data) {
+            this.$emit(`buy`, {data:data})
+        }
+    }
+}
 </script>
 
 <style scoped>
@@ -59,7 +66,8 @@
 
 .img {
     margin-left: 9.5px;
-    width: 190px
+    width: 190px;
+    cursor: pointer;
 }
 
 .content_for_photo {
