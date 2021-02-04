@@ -1,24 +1,21 @@
 # EMAIS-Front
 
-## Project setup
-```
-npm install
+> Проект созданный на Vue, для сroc
+
+## Установить все необходимые пакеты 
+```sh
+npm install # или: yarn
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
+### Для того что бы запустить проект для разработки
+
+```sh
+npm run serve # или: yarn serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
+### Для того что бы сбилдить проект нужно:
+```sh
+npm run build # или: yarn build
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
